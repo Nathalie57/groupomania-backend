@@ -3,25 +3,9 @@ const express = require('express');
 const app = express();
 
 const bodyParser = require('body-parser');
-const mariadb = require('mariadb');
-const env = require('dotenv').config();
-if (env.error) {
-    throw env.error;
-}
 
-mariadb.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME
-})
-.then(conn => {
-    console.log("connected ! connection id is " + conn.threadId);
-  })
-  .catch(err => {
-    console.log("not connected due to error: " + err);
-  });
-
+const commentRoutes = require('./routes/comment');
+const userRoutes    = require('./routes/user')
    
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -31,5 +15,8 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
+
+app.use('/api/comments', commentRoutes);
+app.use('/api/users', userRoutes);
 
 module.exports = app;
