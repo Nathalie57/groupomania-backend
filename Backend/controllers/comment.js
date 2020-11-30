@@ -39,7 +39,7 @@ exports.createReply = (req, res) => {
     }
     const reply = new Comment({
         content: req.body.content,
-        image: req.body.image,
+        image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
         created_at: today,
         id_user: req.body.id_user,
         id_parent: req.body.id_parent
@@ -51,6 +51,49 @@ exports.createReply = (req, res) => {
                     err.message || "Une erreur est survenue"
             });
         else res.send(data);
+    });
+};
+
+exports.update = (req, res) => {
+    if (!req.body) {
+        res.status(400).send({
+            message: "Le contenu ne peut pas être vide"
+        });
+    }
+    console.log(req.body);
+
+    Comment.update(
+        req.params.id,
+        new Comment(req.body),
+        (err, data) => {
+            if (err) {
+                if (err.type === "not_found") {
+                    res.status(404).send({
+                        message: "Commentaire non trouvé"
+                    });
+                } else {
+                    res.status(500).send({
+                        message: "Le commentaire n'a pas été modifié"
+                    });
+                }
+            } else res.send(data);
+        }
+    );
+};
+
+exports.delete = (req, res) => {
+    Comment.delete(req.params.id, (err, data) => {
+        if (err) {
+            if (err.type === "not_found") {
+                res.status(404).send({
+                    message: `Commentaire n°${req.params.id} non trouvé.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Impossible de supprimer le commentaire " + req.params.id
+                });
+            }
+        } else res.send({ message: `Le commentaire n°${req.params.id} a été supprimé` });
     });
 };
 
@@ -89,6 +132,22 @@ exports.getChildComments = (req, res) => {
                 message: "Une erreur est survenue"
             });
 
+        } else res.send(data);
+    });
+};
+
+exports.getCommentsByUser = (req, res) => {
+    Comment.getCommentsByUser(req.params.id_user, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found Customer with id ${req.params.id_user}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving Customer with id " + req.params.id_user
+                });
+            }
         } else res.send(data);
     });
 };

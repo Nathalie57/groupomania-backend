@@ -34,6 +34,47 @@ Comment.createReply = (newReply, result) => {
     });
 };
 
+Comment.update = (id, comment, result) => {
+    sql.query(
+        "UPDATE comment SET content = ?, image = ? WHERE id = ?",
+        [comment.content, comment.image, id],
+        (err, res) => {
+            if (err) {
+                console.log("error: ", err);
+                result(null, err);
+                return;
+            }
+
+            if (res.affectedRows == 0) {
+                result({ type: "not_found" }, null);
+                return;
+            }
+
+            console.log("updated customer: ", { id: id, ...customer });
+            result(null, { id: id, ...customer });
+        }
+    );
+};
+
+Comment.delete = (id, result) => {
+    sql.query("DELETE FROM comment WHERE id = ?", id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+
+        if (res.affectedRows == 0) {
+            // comment not found with the id
+            result({ type: "not_found" }, null);
+            return;
+        }
+
+        console.log("suppression du commentaire n°", id);
+        result(null, res);
+    });
+};
+
 Comment.getMainComments = result => {
     sql.query("SELECT * FROM comment WHERE id_parent IS NULL ORDER BY created_at DESC", (err, res) => {
         if (err) {
@@ -81,6 +122,25 @@ Comment.getChildComments = (id_parent, result) => {
 
         console.log(res);
         result(null, res);
+    });
+};
+
+Comment.getCommentsByUser = (id_user, result) => {
+    sql.query(`SELECT * FROM comment WHERE id_user = ? AND id_parent IS NULL`, id_user, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if (res.length) {
+            console.log(res);
+            result(null, res);
+            return;
+        }
+
+        // not found Customer with the id
+        result({ kind: "not_found" }, null);
     });
 };
 

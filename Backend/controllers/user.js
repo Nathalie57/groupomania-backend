@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const maskData = require('maskdata');
 const jwt = require('jsonwebtoken');
 
-// Create and Save a new user
 exports.create = (req, res) => {
     if (!req.body) {
         res.status(400).send({
@@ -12,8 +11,6 @@ exports.create = (req, res) => {
     }
     // Create a User
     bcrypt.hash(req.body.password, 10, function (err, hash) {
-        // Store hash in your password DB.
-
         const user = new User({
             email: maskData.maskEmail2(req.body.email),
             username: req.body.username,
@@ -31,30 +28,31 @@ exports.create = (req, res) => {
     });
 };
 
-// exports.login = (req, res, next) => {
-//     User.login({ email: maskData.maskEmail2(req.body.email) })
-//       .then(user => {
-//         if (!user) {
-//           return res.status(401).json({ error: 'Utilisateur non trouvé !' });
-//         }
-//         bcrypt.compare(req.body.password, user.password)
-//           .then(valid => {
-//             if (!valid) {
-//               return res.status(401).json({ error: 'Mot de passe incorrect !' });
-//             }
-//             res.status(200).json({
-//               userId: user._id,
-//               token: jwt.sign(
-//                 { userId: user._id },
-//                 'RANDOM_TOKEN_SECRET',
-//                 { expiresIn: '24h' }
-//                 )
-//             });
-//           })
-//           .catch(error => res.status(500).json({ error }));
-//       })
-//       .catch(error => res.status(500).json({ error }));
-//   };
+exports.login = (req, res) => {
+    User.findOne(maskData.maskEmail2(req.body.email), (err, data) => {
+        if (err) {
+            console.log(maskData.maskEmail2(req.body.email));
+            if (err.type === "not_found") {
+                res.status(404).send({
+                    message: `Pas d'utilisateur avec l'email ${req.body.email}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Une erreur est survenue"
+                });
+            }
+        } else {
+            //res.send(data);
+            //console.log(req.body.password, data.password);
+            bcrypt.compare(req.body.password, data.password, function (err, res) {
+                if (res == true) {
+                    console.log('ok');
+                }
+                else console.log("wrong");
+            });
+        }
+    });
+};
 
 exports.delete = (req, res) => {
     User.delete(req.params.id, (err, data) => {
