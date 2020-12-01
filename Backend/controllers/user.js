@@ -29,28 +29,37 @@ exports.create = (req, res) => {
 };
 
 exports.login = (req, res) => {
+
     User.findOne(maskData.maskEmail2(req.body.email), (err, data) => {
-        if (err) {
-            console.log(maskData.maskEmail2(req.body.email));
-            if (err.type === "not_found") {
-                res.status(404).send({
-                    message: `Pas d'utilisateur avec l'email ${req.body.email}.`
-                });
-            } else {
-                res.status(500).send({
-                    message: "Une erreur est survenue"
-                });
-            }
-        } else {
-            //res.send(data);
-            //console.log(req.body.password, data.password);
-            bcrypt.compare(req.body.password, data.password, function (err, res) {
-                if (res == true) {
-                    console.log('ok');
+        console.log("..", err, data.id);
+        bcrypt.compare(req.body.password, data.password, function (error, response) {
+            if (error) {
+                if (error.type === "not_found") {
+                    res.status(404).send({
+                        message: `Pas d'utilisateur avec l'email ${req.body.email}.`
+                    });
+                } else {
+                    res.status(500).send({
+                        message: "Une erreur est survenue"
+                    });
                 }
-                else console.log("wrong");
+            };
+            res.status(200).json({
+                userId: data.id,
+                is_admin: data.is_admin,
+                token: jwt.sign(
+                    {
+                        userId: data.id,
+                        is_admin: data.is_admin,
+                    },
+                    'RANDOM_TOKEN_SECRET',
+                    {
+                        expiresIn: '24h',
+                    }
+                ),
             });
-        }
+        });
+
     });
 };
 
