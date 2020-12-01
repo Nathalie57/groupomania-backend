@@ -1,4 +1,5 @@
 const Comment = require("../models/comment.js");
+const jwt = require('jsonwebtoken');
 
 var today = new Date();
 var dd = today.getDate();
@@ -8,17 +9,28 @@ if (dd < 10) dd = '0' + dd;
 if (mm < 10) mm = '0' + mm;
 today = yyyy + '-' + mm + '-' + dd + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
 
+const decode = (authorization) => {
+    const token = authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+    return {
+        id: decodedToken.id,
+        role: decodedToken.is_admin,
+    };
+};
+
+
 exports.createComment = (req, res) => {
     if (!req.body) {
         res.status(400).send({
             message: "Le contenu ne peut pas être vide"
         });
     }
+    const user = decode(req.headers.authorization);
     const comment = new Comment({
         content: req.body.content,
         image: req.body.image,
         created_at: today,
-        id_user: req.body.id_user,
+        id_user: user.id,
         id_parent: null
     });
     Comment.createComment(comment, (err, data) => {
@@ -82,19 +94,38 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-    Comment.delete(req.params.id, (err, data) => {
-        if (err) {
-            if (err.type === "not_found") {
-                res.status(404).send({
-                    message: `Commentaire n°${req.params.id} non trouvé.`
-                });
-            } else {
-                res.status(500).send({
-                    message: "Impossible de supprimer le commentaire " + req.params.id
-                });
-            }
-        } else res.send({ message: `Le commentaire n°${req.params.id} a été supprimé` });
-    });
+    const user = decode(req.headers.authorization);
+    console.log(user);
+    if (user.is_admin === 0 && id_user === user.id) {
+        Comment.deleteByUser([req.params.id, user.id], (err, data) => {
+            if (err) {
+                if (err.type === "not_found") {
+                    res.status(404).send({
+                        message: `Commentaire n°${req.params.id} non trouvé.`
+                    });
+                } else {
+                    res.status(500).send({
+                        message: "Impossible de supprimer le commentaire " + req.params.id
+                    });
+                }
+            } else res.send({ message: `Le commentaire n°${req.params.id} a été supprimé` });
+        });
+    }
+    else {
+        Comment.deleteByAdmin(req.params.id, (err, data) => {
+            if (err) {
+                if (err.type === "not_found") {
+                    res.status(404).send({
+                        message: `Commentaire n°${req.params.id} non trouvé.`
+                    });
+                } else {
+                    res.status(500).send({
+                        message: "Impossible de supprimer le commentaire " + req.params.id
+                    });
+                }
+            } else res.send({ message: `Le commentaire n°${req.params.id} a été supprimé` });
+        });
+    }
 };
 
 exports.getMainComments = (req, res) => {

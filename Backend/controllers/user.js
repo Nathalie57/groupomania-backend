@@ -45,11 +45,12 @@ exports.login = (req, res) => {
                 }
             };
             res.status(200).json({
-                userId: data.id,
+                id: data.id,
+                username: data.username,
                 is_admin: data.is_admin,
                 token: jwt.sign(
                     {
-                        userId: data.id,
+                        id: data.id,
                         is_admin: data.is_admin,
                     },
                     'RANDOM_TOKEN_SECRET',

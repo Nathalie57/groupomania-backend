@@ -11,8 +11,8 @@ router.get('/:id', auth, commentCtrl.getSingleMainComment);
 router.get('/:id_parent/childcomments', auth, commentCtrl.getChildComments);
 router.get('/user/:id_user', auth, commentCtrl.getCommentsByUser);
 
-router.post('/', multer, auth, commentCtrl.createComment);
-router.post('/replies', multer, auth, commentCtrl.createReply);
+router.post('/', auth, multer, commentCtrl.createComment);
+router.post('/replies', auth, multer, commentCtrl.createReply);
 
 router.put('/:id', auth, commentCtrl.update);
 

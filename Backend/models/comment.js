@@ -56,8 +56,27 @@ Comment.update = (id, comment, result) => {
     );
 };
 
-Comment.delete = (id, result) => {
+Comment.deleteByAdmin = (id, result) => {
     sql.query("DELETE FROM comment WHERE id = ?", id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+
+        if (res.affectedRows == 0) {
+            // comment not found with the id
+            result({ type: "not_found" }, null);
+            return;
+        }
+
+        console.log("suppression du commentaire n°", id);
+        result(null, res);
+    });
+};
+
+Comment.deleteByUser = ([id, id_user], result) => {
+    sql.query("DELETE FROM comment WHERE id = ? AND id_user = ?", [id, id_user], (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
