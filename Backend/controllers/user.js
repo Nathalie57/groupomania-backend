@@ -80,6 +80,22 @@ exports.delete = (req, res) => {
     });
 };
 
+exports.getUserById = (req, res) => {
+    User.getUserById(req.params.id, (err, data) => {
+        if (err) {
+            if (err.type === "not_found") {
+                res.status(404).send({
+                    message: `Cet utilisateur n'existe pas`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Une erreur est survenue"
+                });
+            }
+        } else res.send(data);
+    });
+};
+
 exports.getUsers = (req, res) => {
     User.getUsers((err, data) => {
         if (err)

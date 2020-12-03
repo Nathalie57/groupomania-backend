@@ -1,23 +1,8 @@
 const Comment = require("../models/comment.js");
-const jwt = require('jsonwebtoken');
-
-var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth() + 1;
-var yyyy = today.getFullYear();
-if (dd < 10) dd = '0' + dd;
-if (mm < 10) mm = '0' + mm;
-today = yyyy + '-' + mm + '-' + dd + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-
-const decode = (authorization) => {
-    const token = authorization.split(" ")[1];
-    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-    return {
-        id: decodedToken.id,
-        role: decodedToken.is_admin,
-    };
-};
-
+const token = require("../utils/auth");
+const today = require("../utils/date");
+const decode = token.decode;
+const date = today.today;
 
 exports.createComment = (req, res) => {
     if (!req.body) {
@@ -29,7 +14,7 @@ exports.createComment = (req, res) => {
     const comment = new Comment({
         content: req.body.content,
         image: req.body.image,
-        created_at: today,
+        created_at: date,
         id_user: user.id,
         id_parent: null
     });
@@ -49,11 +34,12 @@ exports.createReply = (req, res) => {
             message: "Le contenu ne peut pas être vide"
         });
     }
+    const user = decode(req.headers.authorization);
     const reply = new Comment({
         content: req.body.content,
         image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
         created_at: today,
-        id_user: req.body.id_user,
+        id_user: user.id,
         id_parent: req.body.id_parent
     });
     Comment.createReply(reply, (err, data) => {
