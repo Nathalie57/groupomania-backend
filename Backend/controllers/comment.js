@@ -1,6 +1,7 @@
 const Comment = require("../models/comment.js");
 const token = require("../utils/auth");
 const today = require("../utils/date");
+const fs = require('fs');
 const decode = token.decode;
 const date = today.today;
 
@@ -37,8 +38,8 @@ exports.createReply = (req, res) => {
     const user = decode(req.headers.authorization);
     const reply = new Comment({
         content: req.body.content,
-        image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-        created_at: today,
+        image: req.body.image,
+        created_at: date,
         id_user: user.id,
         id_parent: req.body.id_parent
     });
@@ -52,38 +53,54 @@ exports.createReply = (req, res) => {
     });
 };
 
-exports.update = (req, res) => {
-    if (!req.body) {
-        res.status(400).send({
-            message: "Le contenu ne peut pas être vide"
-        });
-    }
-    console.log(req.body);
+// exports.getSingleComment = (req, res) => {
+//     Comment.getSingleComment(req.params.id, (err, data) => {
+//         if (err) {
+//             if (err.type === "not_found") {
+//                 res.status(404).send({
+//                     message: `Ce commentaire n'existe pas`
+//                 });
+//             } else {
+//                 res.status(500).send({
+//                     message: "Une erreur est survenue"
+//                 });
+//             }
+//         } else res.send(data);
+//     });
+// };
 
-    Comment.update(
-        req.params.id,
-        new Comment(req.body),
-        (err, data) => {
-            if (err) {
-                if (err.type === "not_found") {
-                    res.status(404).send({
-                        message: "Commentaire non trouvé"
-                    });
-                } else {
-                    res.status(500).send({
-                        message: "Le commentaire n'a pas été modifié"
-                    });
-                }
-            } else res.send(data);
-        }
-    );
-};
+// exports.update = (req, res) => {
+//     if (!req.body) {
+//         res.status(400).send({
+//             message: "Le contenu ne peut pas être vide"
+//         });
+//     }
+//     console.log(req.body);
+//     const user = decode(req.headers.authorization);
+//     Comment.update(
+//         [req.params.id, 
+//         user.id],
+//         new Comment(req.body),
+//         (err, data) => {
+//             if (err) {
+//                 if (err.type === "not_found") {
+//                     res.status(404).send({
+//                         message: "Commentaire non trouvé"
+//                     });
+//                 } else {
+//                     res.status(500).send({
+//                         message: "Le commentaire n'a pas été modifié"
+//                     });
+//                 }
+//             } else res.send(data);
+//         }
+//     );
+// };
 
 exports.delete = (req, res) => {
     const user = decode(req.headers.authorization);
-    console.log(user);
-    if (user.is_admin === 0 && id_user === user.id) {
-        Comment.deleteByUser([req.params.id, user.id], (err, data) => {
+    if (user.role === 1) {
+        Comment.deleteByAdmin(req.params.id, (err, data) => {
             if (err) {
                 if (err.type === "not_found") {
                     res.status(404).send({
@@ -96,13 +113,12 @@ exports.delete = (req, res) => {
                 }
             } else res.send({ message: `Le commentaire n°${req.params.id} a été supprimé` });
         });
-    }
-    else {
-        Comment.deleteByAdmin(req.params.id, (err, data) => {
+    } else {
+        Comment.deleteByUser([req.params.id, user.id], (err, data) => {
             if (err) {
                 if (err.type === "not_found") {
-                    res.status(404).send({
-                        message: `Commentaire n°${req.params.id} non trouvé.`
+                    res.status(401).send({
+                        message: `Vous n'avez pas l'autorisation d'effacer ce commentaire`
                     });
                 } else {
                     res.status(500).send({

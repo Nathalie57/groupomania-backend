@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 
 const bodyParser = require('body-parser');
+const path = require('path');
+const helmet = require('helmet');
 
 const commentRoutes = require('./routes/comment');
 const userRoutes    = require('./routes/user')
@@ -15,6 +17,7 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
+app.use(helmet());
 
 app.use('/api/comments', commentRoutes);
 app.use('/api/users', userRoutes);

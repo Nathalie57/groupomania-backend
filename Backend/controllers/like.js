@@ -1,14 +1,7 @@
 const Like = require("../models/like.js");
 const jwt = require('jsonwebtoken');
-
-const decode = (authorization) => {
-    const token = authorization.split(" ")[1];
-    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-    return {
-        id: decodedToken.id,
-        role: decodedToken.is_admin,
-    };
-};
+const token = require("../utils/auth");
+const decode = token.decode;
 
 exports.createLike = (req, res) => {
     if (!req.body) {

@@ -15,10 +15,10 @@ router.get('/:id_comment/likes', auth, likeCtrl.countLikesByComment);
 router.get('/:id_comment/userLiked', auth, likeCtrl.getLikeByUserByComment);
 
 router.post('/', auth, multer, commentCtrl.createComment);
-router.post('/replies', auth, multer, commentCtrl.createReply);
+router.post('/:id_parent/replies', auth, multer, commentCtrl.createReply);
 router.post('/:id_comment/likes', auth, likeCtrl.createLike);
 
-router.put('/:id', auth, commentCtrl.update);
+//router.put('/:id', auth, commentCtrl.update);
 
 router.delete('/:id', auth, commentCtrl.delete);
 

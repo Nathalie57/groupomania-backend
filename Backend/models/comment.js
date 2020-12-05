@@ -34,27 +34,27 @@ Comment.createReply = (newReply, result) => {
     });
 };
 
-Comment.update = (id, comment, result) => {
-    sql.query(
-        "UPDATE comment SET content = ?, image = ? WHERE id = ?",
-        [comment.content, comment.image, id],
-        (err, res) => {
-            if (err) {
-                console.log("error: ", err);
-                result(null, err);
-                return;
-            }
+// Comment.update = ([id, id_user], comment, result) => {
+//     sql.query(
+//         "UPDATE comment SET content = ?, image = ? WHERE id = ? AND id_user = ?",
+//         [comment.content, comment.image, id, id_user],
+//         (err, res) => {
+//             if (err) {
+//                 console.log("error: ", err);
+//                 result(null, err);
+//                 return;
+//             }
 
-            if (res.affectedRows == 0) {
-                result({ type: "not_found" }, null);
-                return;
-            }
+//             if (res.affectedRows == 0) {
+//                 result({ type: "not_found" }, null);
+//                 return;
+//             }
 
-            console.log("updated customer: ", { id: id, ...customer });
-            result(null, { id: id, ...customer });
-        }
-    );
-};
+//             console.log("mise à jour du commentaire n°", { id: id, ...comment });
+//             result(null, { id: id, ...comment });
+//         }
+//     );
+// };
 
 Comment.deleteByAdmin = (id, result) => {
     sql.query("DELETE FROM comment WHERE id = ?", id, (err, res) => {
@@ -101,6 +101,24 @@ Comment.getMainComments = result => {
             result(null, err);
             return;
         }
+        console.log(res);
+        result(null, res);
+    });
+};
+
+Comment.getSingleComment = (id, result) => {
+    sql.query("SELECT * FROM comment WHERE id = ?", id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+
+        if (res.length == 0) {
+            result({ type: "not_found" }, null);
+            return;
+        }
+
         console.log(res);
         result(null, res);
     });

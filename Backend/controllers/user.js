@@ -2,6 +2,8 @@ const User = require("../models/user.js");
 const bcrypt = require('bcrypt');
 const maskData = require('maskdata');
 const jwt = require('jsonwebtoken');
+const token = require("../utils/auth");
+const decode = token.decode;
 
 exports.create = (req, res) => {
     if (!req.body) {
@@ -31,7 +33,7 @@ exports.create = (req, res) => {
 exports.login = (req, res) => {
 
     User.findOne(maskData.maskEmail2(req.body.email), (err, data) => {
-        console.log("..", err, data.id);
+        // console.log("..", err, data.id);
         bcrypt.compare(req.body.password, data.password, function (error, response) {
             if (error) {
                 if (error.type === "not_found") {
@@ -97,12 +99,17 @@ exports.getUserById = (req, res) => {
 };
 
 exports.getUsers = (req, res) => {
-    User.getUsers((err, data) => {
-        if (err)
-            res.status(500).send({
-                message:
-                    err.message || "Une erreur est survenue"
-            });
-        else res.send(data);
-    });
+    const user = decode(req.headers.authorization);
+    // console.log(user.role);
+    if (user.role === 1) {
+        User.getUsers((err, data) => {
+            if (err)
+                res.status(500).send({
+                    message:
+                        err.message || "Une erreur est survenue"
+                });
+            else res.send(data);
+        });
+    }
+    else res.send("Accès refusé");
 };
