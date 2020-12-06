@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import LoginPage from "./pages/loginPage";
 import HomePage from "./pages/homePage";
 import SignupPage from "./pages/signupPage";
-import Navbar from "./components/navbar";
+import Navbar from "./components/navbar/navbar";
 import authentication from "./services/authentication";
 
 function App() {

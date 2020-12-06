@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import jwtDecode from "jwt-decode";
 import CommentHomePage from "../components/commentHomePage/commentHomePage";
+import ucFirst from "../services/displayNames"
 
 const HomePage = (props) => {
     const token = localStorage.getItem("authToken");
@@ -16,6 +17,7 @@ const HomePage = (props) => {
       <header className="App-header">
           <>
             <h1>Bienvenue {username.ucFirst()}</h1>
+            <form></form>
             < CommentHomePage />
           </>
       </header>
