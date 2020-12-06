@@ -106,6 +106,19 @@ Comment.getMainComments = result => {
     });
 };
 
+Comment.getMainComments = result => {
+    sql.query("SELECT * FROM user INNER JOIN comment ON user.id = comment.id_user ORDER BY created_at DESC", (err, res) => {
+       
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+        console.log(res);
+        result(null, res);
+    });
+};
+
 Comment.getSingleComment = (id, result) => {
     sql.query("SELECT * FROM comment WHERE id = ?", id, (err, res) => {
         if (err) {

@@ -67,7 +67,7 @@ User.getUserById = (id, result) => {
 module.exports = User;
 
 User.getUsers = result => {
-  sql.query("SELECT * FROM user", (err, res) => {
+  sql.query("SELECT id, username FROM user", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

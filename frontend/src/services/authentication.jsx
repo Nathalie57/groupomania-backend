@@ -13,7 +13,6 @@ function authenticate(credentials) {
         .then(token => {
             window.localStorage.setItem("authToken", token);
             axios.defaults.headers["authorization"] = "Bearer " + token;
-
             return true;
         })
 }

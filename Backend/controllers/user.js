@@ -53,6 +53,7 @@ exports.login = (req, res) => {
                 token: jwt.sign(
                     {
                         id: data.id,
+                        username: data.username,
                         is_admin: data.is_admin,
                     },
                     'RANDOM_TOKEN_SECRET',

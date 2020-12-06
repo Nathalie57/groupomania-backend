@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import LoginPage from "./pages/loginPage";
 import HomePage from "./pages/homePage";
 import SignupPage from "./pages/signupPage";
-// import Navbar from "./components/navbar";
+import Navbar from "./components/navbar";
 import authentication from "./services/authentication";
 
 function App() {
@@ -13,21 +13,22 @@ function App() {
 
   return (
     <Router>
+      <Navbar isAuthenticated={isAuthenticated} onLogout={setIsAuthenticated} />
       <Switch>
         <Route
-          path="/login"
-          render={(props) => <LoginPage
+          path="/accueil"
+          render={(props) => <HomePage
             isAuthenticated={isAuthenticated}
-            onLogin={setIsAuthenticated}
           />}
         />
         <Route exact path="/signup">
-          {isAuthenticated ? <Redirect to="/" /> : <SignupPage />}
+          {isAuthenticated ? <Redirect to="/accueil" /> : <SignupPage />}
         </Route>
         <Route
           path="/"
-          render={(props) => <HomePage
+          render={(props) => <LoginPage
             isAuthenticated={isAuthenticated}
+            onLogin={setIsAuthenticated}
           />}
         />
       </Switch>
