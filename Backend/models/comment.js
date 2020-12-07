@@ -107,7 +107,7 @@ Comment.getMainComments = result => {
 };
 
 Comment.getMainComments = result => {
-    sql.query("SELECT * FROM user INNER JOIN comment ON user.id = comment.id_user ORDER BY created_at DESC", (err, res) => {
+    sql.query("SELECT comment.id, username, content, created_at, image, id_parent FROM user INNER JOIN comment ON user.id = comment.id_user WHERE id_parent IS NULL ORDER BY created_at DESC", (err, res) => {
        
         if (err) {
             console.log("error: ", err);

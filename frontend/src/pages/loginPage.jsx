@@ -33,31 +33,35 @@ const LoginPage = ({ onLogin }) => {
     <>
       <div className="App">
         <header className="App-header">
-            
           <h2>Connexion à l'espace sécurisé</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="login-form">
+            <ul>
+              <li>
+                <label htmlFor="email">Identifiant</label>
+                <input
+                  value={credentials.email}
+                  onChange={handleChange}
+                  type="email"
+                  name="email"
+                  id="email"
+                />
+                <span>Entrez votre adresse email ici</span>
+              </li>
+              <li>
+                <label htmlFor="password">Mot de passe</label>
+                <input
+                  value={credentials.password}
+                  onChange={handleChange}
+                  type="password"
+                  name="password"
+                  id="password"
+                />
+                <span>Entrez votre mot de passe ici</span>
+              </li>
+              
+            </ul>
             <div>
-              <label htmlFor="email">Entrez votre identifiant</label>
-              <input
-                value={credentials.email}
-                onChange={handleChange}
-                type="email"
-                name="email"
-                id="email"
-              />
-            </div>
-            <div>
-              <label htmlFor="password">Entrez votre mot de passe</label>
-              <input
-                value={credentials.password}
-                onChange={handleChange}
-                type="password"
-                name="password"
-                id="password"
-              />
-            </div>
-            <div>
-              <button className="button" type="submit">
+              <button className="login-button" type="submit">
                 Connexion
               </button>
             </div>

@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
+
 body {
   display: flex;
   width: 100%;
   justify-content: center;
+  font-family: "Roboto";
 }
 
 div#root {
@@ -10,7 +13,7 @@ div#root {
 
 .App {
   text-align: center;
-  background:#F3F2EF;
+  background: #f3f2ef;
 }
 
 .App-logo {
@@ -18,19 +21,30 @@ div#root {
   pointer-events: none;
 }
 
-h1 {
-  padding-top: 2rem;
+img.logo {
+  width: 40%;
+}
+
+header.App-header {
+  padding: 2rem;
+}
+
+h2 {
+  margin: 0;
 }
 
 ul.navigation {
   display: flex;
   justify-content: space-between;
   margin: 0;
-  margin-bottom: -1.3rem;
   padding: 2rem;
-  background:#FDFDFD;
+  background: #fdfdfd;
   border-bottom: solid;
-  border-bottom-color: #D8D7D5;
+  border-bottom-color: #d8d7d5;
+}
+
+img.image-homepage {
+  padding-top: 2rem;
 }
 
 @media screen and (max-width: 375px) {
@@ -56,9 +70,20 @@ ul.navigation {
   padding: 2.5rem;
   text-align: justify;
   border: solid;
-  border-color: #D8D7D5;
+  border-color: #d8d7d5;
   border-radius: 1rem;
-  background: #FDFDFD;
+  background: #fdfdfd;
+}
+
+.username {
+  font-size: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.date {
+  font-style: italic;
+  color: #b1b1b1;
+  padding-bottom: 0.3rem;
 }
 
 .App-link {
@@ -78,3 +103,93 @@ ul.navigation {
   display: inline;
   margin-right: 10px;
 }
+
+.login-button {
+  border: none;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background: #686868;
+  font: bold 13px "Roboto";
+  color: #fff;
+  font-size: 1rem;
+}
+
+a.login-button {
+  padding: 0.5rem;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.login-form{
+	max-width:400px;
+	margin:50px auto;
+	background:#fff;
+	border-radius:2px;
+	padding:20px;
+  font-family: "Roboto";
+  font-size: 1rem
+}
+.login-form h1{
+	display: block;
+	text-align: center;
+	padding: 0;
+	margin: 0px 0px 20px 0px;
+	color: #5C5C5C;
+	font-size:x-large;
+}
+.login-form ul{
+	list-style:none;
+	padding:0;
+	margin:0;	
+}
+.login-form li{
+	display: block;
+	padding: 9px;
+	border:1px solid #DDDDDD;
+	margin-bottom: 30px;
+	border-radius: 3px;
+}
+
+.login-form li > label{
+	display: block;
+	float: left;
+	margin-top: -19px;
+	background: #FFFFFF;
+	height: 14px;
+	padding: 2px 5px 2px 5px;
+	color: #5d5d5d;
+	font-size: 14px;
+	overflow: hidden;
+	font-family: "Roboto";
+}
+
+.login-form input
+{
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	width: 100%;
+	display: block;
+	outline: none;
+	border: none;
+	height: 25px;
+	line-height: 25px;
+	font-size: 16px;
+	padding: 0;
+	font-family: "Roboto";
+}
+
+.login-form li > span{
+	background: #F3F3F3;
+	display: block;
+	padding: 3px;
+	margin: 0 -9px -9px -9px;
+	text-align: center;
+	color: #5d5d5d;
+	font-family: "Roboto";
+	font-size: 11px;
+}
+.login-form textarea{
+	resize:none;
+}
+
