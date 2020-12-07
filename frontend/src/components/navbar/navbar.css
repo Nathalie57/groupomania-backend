@@ -1,4 +1,14 @@
+.navigation li {
+  display: inline;
+  margin-right: 10px;
+}
+
 ul.navigation {
     display: flex;
     justify-content: space-between;
-}
+    margin: 0;
+    padding: 2rem;
+    background: #fdfdfd;
+    border-bottom: solid;
+    border-bottom-color: #d8d7d5;
+  }

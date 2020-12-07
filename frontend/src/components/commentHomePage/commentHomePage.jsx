@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import jwtDecode from "jwt-decode";
+import "./commentHomePage.css";
+// import jwtDecode from "jwt-decode";
 
 const backendUrl = "http://localhost:3000";
 const commentsEndpoint = `${backendUrl}/api/comments?format=json`;

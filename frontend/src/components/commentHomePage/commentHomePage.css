@@ -1,0 +1,25 @@
+img.image-homepage {
+  padding-top: 2rem;
+  width: 100%;
+}
+
+.comment-homepage {
+  margin: 2rem;
+  padding: 2.5rem;
+  text-align: justify;
+  border: solid;
+  border-color: #d8d7d5;
+  border-radius: 1rem;
+  background: #fdfdfd;
+}
+
+.username {
+  font-size: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.date {
+  font-style: italic;
+  color: #b1b1b1;
+  padding-bottom: 0.3rem;
+}

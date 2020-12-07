@@ -33,27 +33,6 @@ function App() {
         />
       </Switch>
     </Router>
-    // <Fragment>
-    //   <HashRouter>
-    //     <Navbar isAuthenticated={isAuthenticated} onLogout={setIsAuthenticated} />
-    //     <Switch>
-    //       <Route path="/beneficiaire" component={NewBeneficiaryPage} />
-    //       <Route
-    //         path="/login"
-    //         render={(props) => <LoginPage
-    //           isAuthenticated={isAuthenticated}
-    //           onLogin={setIsAuthenticated}
-    //         />}
-    //       />
-    //       <Route
-    //         path="/"
-    //         render={(props) => <HomePage
-    //           isAuthenticated={isAuthenticated}
-    //         />}
-    //       />
-    //     </Switch>
-    //   </HashRouter>
-    // </Fragment>
   );
 }
 

@@ -43,4 +43,17 @@ Like.countLikes = (id_comment, result) => {
     });
 };
 
+Like.existComment = (id, result) => {
+    // console.log("1");
+    sql.query("SELECT id FROM comment WHERE id = ? LIMIT 1", id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            throw (err);
+        }
+        if (res.length > 0) return result(true);
+        result(false);
+    });
+    // console.log("2");
+}
+
 module.exports = Like;

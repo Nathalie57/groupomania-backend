@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
 import authentication from "../../services/authentication";
+import "./navbar.css";
 
 
 const Navbar = ({ isAuthenticated, onLogout }) => {
@@ -17,7 +18,11 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
       {(!isAuthenticated && (
         <>
           <li><img src="logo.png" className="logo"></img></li>
-          
+          <li>
+            <NavLink to="/signup" className="login-button">
+              Inscription
+            </NavLink>
+          </li>
         </>
       )) || (
         <>

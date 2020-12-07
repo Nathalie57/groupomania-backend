@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap");
 
 body {
   display: flex;
@@ -33,36 +33,9 @@ h2 {
   margin: 0;
 }
 
-ul.navigation {
-  display: flex;
-  justify-content: space-between;
-  margin: 0;
-  padding: 2rem;
-  background: #fdfdfd;
-  border-bottom: solid;
-  border-bottom-color: #d8d7d5;
-}
-
-img.image-homepage {
+/* img.image-homepage {
   padding-top: 2rem;
-}
-
-@media screen and (max-width: 375px) {
-  img.image-homepage {
-    width: 200px;
-  }
-}
-
-@media screen and (min-width: 375px) and (max-width: 425px) {
-  img.image-homepage {
-    width: 250px;
-  }
-}
-
-@media screen and (min-width: 425px) and (max-width: 768px) {
-  img.image-homepage {
-    width: 500px;
-  }
+  width: 100%;
 }
 
 .comment-homepage {
@@ -73,9 +46,24 @@ img.image-homepage {
   border-color: #d8d7d5;
   border-radius: 1rem;
   background: #fdfdfd;
-}
+} */
 
-.username {
+/* @media screen and (max-width: 767px) {
+  .comment-homepage {
+    margin: 0;
+    padding: 1.5rem;
+    text-align: justify;
+    border-top: solid;
+    border-color: #d8d7d5;
+    background: #fdfdfd;
+  }
+
+  header.App-header {
+    padding: 0;
+  }
+} */
+
+/* .username {
   font-size: 1.5rem;
   padding-bottom: 0.5rem;
 }
@@ -84,7 +72,7 @@ img.image-homepage {
   font-style: italic;
   color: #b1b1b1;
   padding-bottom: 0.3rem;
-}
+} */
 
 .App-link {
   color: #61dafb;
@@ -97,11 +85,6 @@ img.image-homepage {
   to {
     transform: rotate(360deg);
   }
-}
-
-.navigation li {
-  display: inline;
-  margin-right: 10px;
 }
 
 .login-button {
@@ -120,76 +103,74 @@ a.login-button {
   text-decoration: none;
 }
 
-.login-form{
-	max-width:400px;
-	margin:50px auto;
-	background:#fff;
-	border-radius:2px;
-	padding:20px;
+.login-form {
+  max-width: 75%;
+  margin: 50px auto;
+  background: #fff;
+  border-radius: 2px;
+  padding: 20px;
   font-family: "Roboto";
-  font-size: 1rem
+  font-size: 1rem;
 }
-.login-form h1{
-	display: block;
-	text-align: center;
-	padding: 0;
-	margin: 0px 0px 20px 0px;
-	color: #5C5C5C;
-	font-size:x-large;
+.login-form h1 {
+  display: block;
+  text-align: center;
+  padding: 0;
+  margin: 0px 0px 20px 0px;
+  color: #5c5c5c;
+  font-size: x-large;
 }
-.login-form ul{
-	list-style:none;
-	padding:0;
-	margin:0;	
+.login-form ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-.login-form li{
-	display: block;
-	padding: 9px;
-	border:1px solid #DDDDDD;
-	margin-bottom: 30px;
-	border-radius: 3px;
-}
-
-.login-form li > label{
-	display: block;
-	float: left;
-	margin-top: -19px;
-	background: #FFFFFF;
-	height: 14px;
-	padding: 2px 5px 2px 5px;
-	color: #5d5d5d;
-	font-size: 14px;
-	overflow: hidden;
-	font-family: "Roboto";
+.login-form li {
+  display: block;
+  padding: 9px;
+  border: 1px solid #dddddd;
+  margin-bottom: 30px;
+  border-radius: 3px;
 }
 
-.login-form input
-{
-	box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	width: 100%;
-	display: block;
-	outline: none;
-	border: none;
-	height: 25px;
-	line-height: 25px;
-	font-size: 16px;
-	padding: 0;
-	font-family: "Roboto";
+.login-form li > label {
+  display: block;
+  float: left;
+  margin-top: -19px;
+  background: #ffffff;
+  height: 14px;
+  padding: 2px 5px 2px 5px;
+  color: #5d5d5d;
+  font-size: 14px;
+  overflow: hidden;
+  font-family: "Roboto";
 }
 
-.login-form li > span{
-	background: #F3F3F3;
-	display: block;
-	padding: 3px;
-	margin: 0 -9px -9px -9px;
-	text-align: center;
-	color: #5d5d5d;
-	font-family: "Roboto";
-	font-size: 11px;
-}
-.login-form textarea{
-	resize:none;
+.login-form input {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  width: 100%;
+  display: block;
+  outline: none;
+  border: none;
+  height: 25px;
+  line-height: 25px;
+  font-size: 16px;
+  padding: 0;
+  font-family: "Roboto";
 }
 
+.login-form li > span {
+  background: #f3f3f3;
+  display: block;
+  padding: 3px;
+  margin: 0 -9px -9px -9px;
+  text-align: center;
+  color: #5d5d5d;
+  font-family: "Roboto";
+  font-size: 11px;
+}
+.login-form textarea {
+  resize: none;
+}

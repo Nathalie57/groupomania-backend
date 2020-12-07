@@ -33,7 +33,11 @@ exports.create = (req, res) => {
 exports.login = (req, res) => {
 
     User.findOne(maskData.maskEmail2(req.body.email), (err, data) => {
-        // console.log("..", err, data.id);
+        console.log("..", err, data);
+        if(err) {
+            res.status(401).send("unknown");
+            return;
+        }
         bcrypt.compare(req.body.password, data.password, function (error, response) {
             if (error) {
                 if (error.type === "not_found") {
@@ -46,7 +50,8 @@ exports.login = (req, res) => {
                     });
                 }
             };
-            res.status(200).json({
+            if(response) res.status(200).json({
+                response: response,
                 id: data.id,
                 username: data.username,
                 is_admin: data.is_admin,
@@ -62,6 +67,7 @@ exports.login = (req, res) => {
                     }
                 ),
             });
+            else res.status(401).send("interdit");
         });
 
     });
