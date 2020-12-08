@@ -74,7 +74,7 @@ h2 {
   padding-bottom: 0.3rem;
 } */
 
-.App-link {
+/* .App-link {
   color: #61dafb;
 }
 
@@ -85,7 +85,7 @@ h2 {
   to {
     transform: rotate(360deg);
   }
-}
+} */
 
 .login-button {
   border: none;
@@ -103,7 +103,7 @@ a.login-button {
   text-decoration: none;
 }
 
-.login-form {
+/* .login-form {
   max-width: 75%;
   margin: 50px auto;
   background: #fff;
@@ -173,4 +173,4 @@ a.login-button {
 }
 .login-form textarea {
   resize: none;
-}
+} */

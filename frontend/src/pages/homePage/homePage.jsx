@@ -1,7 +1,8 @@
 import React from "react";
 import jwtDecode from "jwt-decode";
-import CommentHomePage from "../components/commentHomePage/commentHomePage";
-import ucFirst from "../services/displayNames"
+import CommentHomePage from "../../components/commentHomePage/commentHomePage";
+import "./homePage.css";
+import ucFirst from "../../services/displayNames"
 
 const HomePage = (props) => {
     const token = localStorage.getItem("authToken");
