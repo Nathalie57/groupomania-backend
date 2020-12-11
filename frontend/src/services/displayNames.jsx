@@ -1,7 +1,10 @@
-function ucFirst() {
-    String.prototype.ucFirst = function () {
-        return this.substr(0, 1).toUpperCase() + this.substr(1);
-      };
+// function ucFirst(value) {
+//     return (value+'').charAt(0).toUpperCase();
+// }
+
+function ucFirst(string) 
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 export default {

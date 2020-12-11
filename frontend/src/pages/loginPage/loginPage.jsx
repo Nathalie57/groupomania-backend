@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import authentication from "../../services/authentication";
 import Button from "../../components/button/button.jsx";
+import Field from "../../components/inputField/inputField.jsx";
 import "./loginPage.css";
 
 const LoginPage = ({ onLogin }) => {
@@ -38,28 +39,22 @@ const LoginPage = ({ onLogin }) => {
           <h2>Connexion à l'espace sécurisé</h2>
           <form onSubmit={handleSubmit} className="login-form">
             <ul>
-              <li>
-                <label htmlFor="email">Identifiant</label>
-                <input
-                  value={credentials.email}
-                  onChange={handleChange}
-                  type="email"
-                  name="email"
-                  id="email"
-                />
-                <span>Entrez votre adresse email ici</span>
-              </li>
-              <li>
-                <label htmlFor="password">Mot de passe</label>
-                <input
-                  value={credentials.password}
-                  onChange={handleChange}
-                  type="password"
-                  name="password"
-                  id="password"
-                />
-                <span>Entrez votre mot de passe ici</span>
-              </li>
+              <Field
+                name="email"
+                type="email"
+                label="Identifiant"
+                onChange={handleChange}
+                value={credentials.email}
+                span="Entrez votre adresse email ici"
+              />
+              <Field
+                name="password"
+                type="password"
+                label="Mot de passe"
+                onChange={handleChange}
+                value={credentials.password}
+                span="Entrez votre mot de passe ici"
+              />
             </ul>
             <div>
               <Button value="Connexion" type="submit" />

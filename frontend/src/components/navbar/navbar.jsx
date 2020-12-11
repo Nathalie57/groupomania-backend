@@ -5,7 +5,6 @@ import authentication from "../../services/authentication";
 import "./navbar.css";
 
 const Navbar = ({ isAuthenticated, onLogout }) => {
-  
   const history = useHistory();
 
   const handleLogout = () => {
@@ -24,12 +23,18 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
       {(!isAuthenticated && (
         <>
           <li>
-            <img src="logo.png" className="logo"></img>
+            <NavLink to="/">
+              <img src="logo.png" className="logo" alt="logo"></img>
+            </NavLink>
           </li>
           <li>
             <NavLink to="/signup">
               <div>
-                <Button id="signup-button" value="Inscription" onClick={changeName}></Button>
+                <Button
+                  id="signup-button"
+                  value="Inscription"
+                  // onClick={changeName}
+                ></Button>
               </div>
             </NavLink>
           </li>
@@ -37,7 +42,9 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
       )) || (
         <>
           <li>
-            <img src="logo.png" className="logo"></img>
+            <NavLink to="/accueil">
+              <img src="logo.png" className="logo" alt="logo"></img>
+            </NavLink>
           </li>
           <li>
             <Button onClick={handleLogout} value="Déconnexion" />

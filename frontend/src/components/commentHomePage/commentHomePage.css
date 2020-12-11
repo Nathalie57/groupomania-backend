@@ -23,3 +23,9 @@ img.image-homepage {
   color: #b1b1b1;
   padding-bottom: 0.3rem;
 }
+
+span.likesCount:before {
+    font-family: "Font Awesome\ 5 Free";
+font-weight: 400;
+content: "\f007";
+}
