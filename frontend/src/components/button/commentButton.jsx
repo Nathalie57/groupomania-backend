@@ -1,11 +1,12 @@
 import React from "react";
+import "./button.css";
 
-const Button = (props) => {
+const CommentButton = (props) => {
 
     return (
         <button
             id={props.id}
-            className="login-button"
+            className="comment-button"
             onClick={props.onClick}
             to={props.to}
         >
@@ -14,4 +15,4 @@ const Button = (props) => {
     );
 };
 
-export default Button;
+export default CommentButton;

@@ -1,3 +1,10 @@
+:root {
+  --background: #f3f2ef;
+  --second-background: #fdfdfd;
+  --border-color: #d8d7d5;
+  --date-color: #b1b1b1;
+}
+
 img.image-homepage {
   padding-top: 2rem;
   width: 100%;
@@ -8,9 +15,9 @@ img.image-homepage {
   padding: 2.5rem;
   text-align: justify;
   border: solid;
-  border-color: #d8d7d5;
+  border-color: var(--border-color);
   border-radius: 1rem;
-  background: #fdfdfd;
+  background: var(--second-background);
 }
 
 .username {
@@ -20,12 +27,12 @@ img.image-homepage {
 
 .date {
   font-style: italic;
-  color: #b1b1b1;
+  color: var(--date-color);
   padding-bottom: 0.3rem;
 }
 
 span.likesCount:before {
-    font-family: "Font Awesome\ 5 Free";
-font-weight: 400;
-content: "\f007";
+  font-family: "Font Awesome\ 5 Free";
+  font-weight: 400;
+  content: "\f007";
 }

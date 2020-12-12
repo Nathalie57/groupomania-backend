@@ -1,7 +1,15 @@
+:root {
+  --background: #f3f2ef;
+  --second-background: #fdfdfd;
+  --border-color: #d8d7d5;
+  --date-color: #b1b1b1;
+  --input-text: #686868;
+}
+
 .login-form {
     max-width: 75%;
     margin: 50px auto;
-    background: #fff;
+    background: var(--second-background);
     border-radius: 2px;
     padding: 20px;
     font-family: "Roboto";
@@ -12,7 +20,7 @@
     text-align: center;
     padding: 0;
     margin: 0px 0px 20px 0px;
-    color: #5c5c5c;
+    color: var(--input-text);
     font-size: x-large;
   }
   .login-form ul {
@@ -23,7 +31,7 @@
   .login-form li {
     display: block;
     padding: 9px;
-    border: 1px solid #dddddd;
+    border: 1px solid var(--border-color);
     margin-bottom: 30px;
     border-radius: 3px;
   }
@@ -32,10 +40,10 @@
     display: block;
     float: left;
     margin-top: -19px;
-    background: #ffffff;
+    background: var(--second-background);
     height: 14px;
     padding: 2px 5px 2px 5px;
-    color: #5d5d5d;
+    color: var(--input-text);
     font-size: 14px;
     overflow: hidden;
     font-family: "Roboto";
@@ -57,12 +65,12 @@
   }
   
   .login-form li > span {
-    background: #f3f3f3;
+    background: var(--background);
     display: block;
     padding: 3px;
     margin: 0 -9px -9px -9px;
     text-align: center;
-    color: #5d5d5d;
+    color: var(--input-text);
     font-family: "Roboto";
     font-size: 11px;
   }

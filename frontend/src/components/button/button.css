@@ -1,0 +1,23 @@
+:root {
+  --background: #f3f2ef;
+  --second-background: #fdfdfd;
+  --border-color: #d8d7d5;
+  --date-color: #b1b1b1;
+  --input-text: #686868;
+}
+
+.login-button {
+    border: none;
+    padding: 0.5rem;
+    border-radius: 8px;
+    background: var(--input-text);
+    font: bold 13px "Roboto";
+    color: var(--second-background);
+    font-size: 1rem;
+  }
+  
+  a.login-button {
+    padding: 0.5rem;
+    font-size: 1rem;
+    text-decoration: none;
+  }

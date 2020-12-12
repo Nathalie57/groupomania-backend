@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import authentication from "../../services/authentication";
-import Button from "../../components/button/button.jsx";
+import Button from "../../components/button/loginButton.jsx";
 import Field from "../../components/inputField/inputField.jsx";
 import "./loginPage.css";
+import "../../components/button/button.css"
 
 const LoginPage = ({ onLogin }) => {
   const [credentials, setCredentials] = useState({
@@ -57,7 +58,7 @@ const LoginPage = ({ onLogin }) => {
               />
             </ul>
             <div>
-              <Button value="Connexion" type="submit" />
+              <Button value="Connexion" type="submit" className="login-button" />
             </div>
           </form>
         </header>

@@ -1,31 +1,59 @@
-// import { useEffect } from "react";
-import React, { useEffect} from "react";
+import React, { useEffect, useState } from "react";
+import Field from "../../components/inputField/inputField.jsx";
+import Button from "../../components/button/loginButton.jsx";
+import "../../components/button/button.css";
+import "../../pages/loginPage/loginPage.css";
+import commentDatamanager from "../../services/commentDatamanager.jsx";
 
 export default function Modal(props) {
-    function close() {
-        props.modalElement.current.style.display = 'none';
-    }
+  const [comment, setComment] = useState({
+    content: "",
+    image: "",
+  });
 
-    function open() {
-        props.modalElement.current.style.display = 'block';
-    }
-    
-    useEffect(() => {
-        props.buttonOpen.current.onclick = open;
-    });
+  const handleChange = ({ currentTarget }) => {
+    const { value, name } = currentTarget;
 
-return (
+    setComment({ ...comment, [name]: value });
+  };
+
+  function close() {
+    props.modalElement.current.style.display = "none";
+  }
+
+  function open() {
+    props.modalElement.current.style.display = "block";
+  }
+
+  useEffect(() => {
+    props.buttonOpen.current.onclick = open;
+  });
+
+  return (
     <div>
-        <h1>Adding a new Person</h1>
-        <form id='personForm' onSubmit={e => props.addComment(e)}>
-            <p>name<br/><input placeholder="Enter name" name="name" required="required"/></p>
-            <p>password
-                <br/><input type="password" name="password" required="required"/></p>
-            <div id="buttons">
-                <button type="submit">OK</button>
-                <button type="button" onClick={close}>Cancel</button>
-            </div>
-        </form>
+      <form className="login-form" onSubmit={(e) => props.addComment(e)}>
+        <h1>Créer un post</h1>
+        <Field
+          name="comment"
+          type="comment"
+          label="Nouveau post"
+          onChange={handleChange}
+          value={comment.content}
+        />
+        <div className="login-button">
+          <span>
+            <Button value="Publier" type="submit" className="login-button" />
+          </span>
+          <span>
+            <Button
+              value="Annuler"
+              type="button"
+              className="login-button"
+              onClick={close}
+            />
+          </span>
+        </div>
+      </form>
     </div>
-);
+  );
 }

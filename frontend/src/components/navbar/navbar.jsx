@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
-import Button from "../../components/button/button.jsx";
+import Button from "../button/loginButton.jsx";
 import authentication from "../../services/authentication";
 import "./navbar.css";
 
