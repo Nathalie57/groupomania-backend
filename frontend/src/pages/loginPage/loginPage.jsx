@@ -61,6 +61,9 @@ const LoginPage = ({ onLogin }) => {
               <Button value="Connexion" type="submit" className="login-button" />
             </div>
           </form>
+          <div className="login-form">
+          <p>Pas encore de compte, inscrivez-vous !</p>
+          </div>
         </header>
       </div>
     </>

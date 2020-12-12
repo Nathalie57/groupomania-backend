@@ -27,7 +27,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
               <img src="logo.png" className="logo" alt="logo"></img>
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink to="/signup">
               <div>
                 <Button
@@ -37,7 +37,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                 ></Button>
               </div>
             </NavLink>
-          </li>
+          </li> */}
         </>
       )) || (
         <>

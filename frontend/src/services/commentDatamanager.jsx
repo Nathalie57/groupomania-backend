@@ -10,12 +10,25 @@ async function findMainComments() {
 
   const config = {
     method: "get",
-    url: `${ COMMENTS_API }`,
+    url: `${COMMENTS_API}`,
     headers: { Authorization: `Bearer ${token}` },
   };
 
   let data = await axios(config);
   return data;
+}
+
+async function create(comment) {
+  const token = localStorage.getItem("authToken");
+  const config = {
+    method: "post",
+    url: `${COMMENTS_API}`,
+    data: comment,
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  let response = await axios(config);
+  console.log(response);
+  return response;
 }
 
 // async function find(id) {
@@ -62,22 +75,10 @@ async function findMainComments() {
 //   });
 // }
 
-// function create(customer) {
-//   return axios.post(CUSTOMERS_API, customer).then(async response => {
-//     const cachedCustomers = await Cache.get("customers");
-
-//     if (cachedCustomers) {
-//       Cache.set("customers", [...cachedCustomers, response.data]);
-//     }
-
-//     return response;
-//   });
-// }
-
 export default {
   findMainComments,
+  create,
   //   find,
-  //   create,
   //   update,
   //   delete: deleteCustomer
 };

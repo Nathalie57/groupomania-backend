@@ -8,7 +8,7 @@ const Field = ({
   span,
   type = "text",
   placeholder= "",
-  onclick
+  onClick
 }) => (
   <li>
     <label htmlFor={name}>{label}</label>
@@ -19,7 +19,7 @@ const Field = ({
       name={name}
       id={name}
       placeholder={placeholder}
-      onclick={onclick}
+      onClick={onClick}
     />
     <span>{span}</span>
   </li>

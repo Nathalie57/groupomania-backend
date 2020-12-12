@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Redirect, useHistory } from "react-router-dom";
 import Field from "../../components/inputField/inputField.jsx";
 import Button from "../../components/button/loginButton.jsx";
+import CommentsAPI from "../../services/commentDatamanager";
 import "../../components/button/button.css";
 import "../../pages/loginPage/loginPage.css";
-import commentDatamanager from "../../services/commentDatamanager.jsx";
 
 export default function Modal(props) {
   const [comment, setComment] = useState({
@@ -29,31 +30,43 @@ export default function Modal(props) {
     props.buttonOpen.current.onclick = open;
   });
 
+  const history = useHistory();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await CommentsAPI.create(comment);
+      props.modalElement.current.style.display = "none";
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    // return <Redirect to="/accueil" refresh="true" />;
+    document.location.reload();
+  };
+
   return (
-    <div>
-      <form className="login-form" onSubmit={(e) => props.addComment(e)}>
+    <div className="login-form">
+      <form onSubmit={handleSubmit}>
         <h1>Créer un post</h1>
         <Field
-          name="comment"
-          type="comment"
+          name="content"
+          type="text"
           label="Nouveau post"
           onChange={handleChange}
           value={comment.content}
         />
         <div className="login-button">
-          <span>
-            <Button value="Publier" type="submit" className="login-button" />
-          </span>
-          <span>
-            <Button
-              value="Annuler"
-              type="button"
-              className="login-button"
-              onClick={close}
-            />
-          </span>
+          <Button value="Publier" type="submit" className="login-button" />
         </div>
       </form>
+      <div className="login-button">
+        <Button
+          value="Annuler"
+          type="button"
+          className="login-button"
+          onClick={close}
+        />
+      </div>
     </div>
   );
 }
