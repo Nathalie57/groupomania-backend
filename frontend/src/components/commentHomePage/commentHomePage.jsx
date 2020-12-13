@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./commentHomePage.css";
 import CommentsAPI from "../../services/commentDatamanager";
 import ReplyHomePage from "../replyHomePage/replyHomePage";
+import GetCountedLikes from "../countLikes/countLikes";
 
 const CommentHomePage = (props) => {
   String.prototype.ucFirst = function () {
@@ -58,14 +59,20 @@ const CommentHomePage = (props) => {
             <div>
               <img src={comment.image} className="image-homepage"></img>
             </div>
-            <div>
-              <span className="likesCount">Nombre de likes</span>
+            <div className="counted-likes">
+              <div className="under-image">
+              <span>
+                <GetCountedLikes id={comment.id} />
+              </span>
               <span>Nombre de commentaires</span>
+              </div>
             </div>
-            <div></div>
-            <ReplyHomePage 
-            id={comment.id}
-            />
+            <div>
+              <span className="like">J'aime</span>
+              <span className="share">Partager</span>
+              <span className="comment">Commenter</span>
+            </div>
+            <ReplyHomePage id={comment.id} />
           </div>
         ))}
       </div>

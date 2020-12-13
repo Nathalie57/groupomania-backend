@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import CommentsAPI from "../../services/commentDatamanager";
 
-const getCountedLikes = ({ id }) => {
+const GetCountedLikes = ({ id }) => {
   const [likes, setLikes] = useState([]);
 
   const countLikesByComment = async () => {
     try {
-      CommentsAPI.countLikes(14)
+      CommentsAPI.countLikes(id)
         .then((response) => response.data)
         .then((data) => setLikes(data));
     } catch (error) {
@@ -18,33 +18,20 @@ const getCountedLikes = ({ id }) => {
     countLikesByComment(id);
   }, [id]);
 
-  console.log(countLikesByComment);
-
+  console.log(likes);
+  console.log(likes[0]);
+  const like = likes[0];
   return (
     <>
       <div>
-        {likes.map((like) => (
-          <div className="reply-homepage" key={like.id}>
-            <div className="reply-username">
-              {comment.username.ucFirst()}
-              <span className="reply-date">
-                {formatDate(comment.created_at)}
-              </span>
-            </div>
-            <div>{comment.content}</div>
-            <div>
-              <img src={comment.image} className="reply-image-homepage"></img>
-            </div>
-            <div>
-              <span className="likesCount">Nombre de likes</span>
-              <span>Nombre de commentaires</span>
-            </div>
-            <div></div>
+        {/* {likes.map((like) => ( */}
+          <div className="">
+            <span className="likesCount">{}</span>
           </div>
-        ))}
+        {/* ))} */}
       </div>
     </>
   );
 };
 
-export default getCountedLikes;
+export default GetCountedLikes;

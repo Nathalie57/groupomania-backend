@@ -54,7 +54,6 @@ async function countLikes(id) {
     headers: { Authorization: `Bearer ${token}` },
   };
   let data = await axios(config);
-  console.log(data);
   return data;
 }
 

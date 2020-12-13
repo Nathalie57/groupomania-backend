@@ -37,11 +37,6 @@ const ReplyHomePage = ({ id }) => {
             <div>
               <img src={comment.image} className="reply-image-homepage"></img>
             </div>
-            <div>
-              <span className="likesCount">Nombre de likes</span>
-              <span>Nombre de commentaires</span>
-            </div>
-            <div></div>
           </div>
         ))}
       </div>
