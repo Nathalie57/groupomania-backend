@@ -31,6 +31,17 @@ async function create(comment) {
   return response;
 }
 
+async function countLikes(id) {
+  const token = localStorage.getItem("authToken");
+  const config = {
+    method: "get",
+    url: `${COMMENTS_API + "/" + id + "/likes"}`,
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  let data = await axios(config);
+  return data;
+}
+
 // async function find(id) {
 //   const cachedCustomer = await Cache.get("customers." + id);
 
@@ -78,6 +89,7 @@ async function create(comment) {
 export default {
   findMainComments,
   create,
+  countLikes
   //   find,
   //   update,
   //   delete: deleteCustomer

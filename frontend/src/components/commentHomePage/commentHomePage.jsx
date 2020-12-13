@@ -39,6 +39,10 @@ const CommentHomePage = (props) => {
             </div>
             <div>
             <span className="likesCount">Nombre de likes</span>
+            <span>Nombre de commentaires</span>
+            </div>
+            <div>
+
             </div>
           </div>
         ))}

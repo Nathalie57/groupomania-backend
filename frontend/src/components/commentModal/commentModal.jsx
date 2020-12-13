@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import ImageUploader from "react-images-upload";
 import Field from "../../components/inputField/inputField.jsx";
 import Button from "../../components/button/loginButton.jsx";
 import CommentsAPI from "../../services/commentDatamanager";
@@ -11,6 +11,12 @@ export default function Modal(props) {
     content: "",
     image: "",
   });
+
+  const [images, setImages] = useState([]);
+
+  const onDrop = (image) => {
+    setImages([...images, image]);
+  };
 
   const handleChange = ({ currentTarget }) => {
     const { value, name } = currentTarget;
@@ -30,8 +36,6 @@ export default function Modal(props) {
     props.buttonOpen.current.onclick = open;
   });
 
-  const history = useHistory();
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -40,7 +44,6 @@ export default function Modal(props) {
     } catch (error) {
       console.log(error.response.data);
     }
-    // return <Redirect to="/accueil" refresh="true" />;
     document.location.reload();
   };
 
@@ -54,6 +57,15 @@ export default function Modal(props) {
           label="Nouveau post"
           onChange={handleChange}
           value={comment.content}
+        />
+        <ImageUploader
+          {...props}
+          withIcon={true}
+          onChange={onDrop}
+          imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+          maxFileSize={5242880}
+          name="image"
+          value={comment.image}
         />
         <div className="login-button">
           <Button value="Publier" type="submit" className="login-button" />
