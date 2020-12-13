@@ -18,6 +18,21 @@ async function findMainComments() {
   return data;
 }
 
+async function findChildComments(id) {
+  const token = localStorage.getItem("authToken");
+  const cachedComments = await Cache.get("comments");
+
+  if (cachedComments) return cachedComments;
+
+  const config = {
+    method: "get",
+    url: `${COMMENTS_API + "/" + id + "/childComments"}`,
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  let data = await axios(config);
+  return data;
+}
+
 async function create(comment) {
   const token = localStorage.getItem("authToken");
   const config = {
@@ -39,6 +54,7 @@ async function countLikes(id) {
     headers: { Authorization: `Bearer ${token}` },
   };
   let data = await axios(config);
+  console.log(data);
   return data;
 }
 
@@ -89,7 +105,8 @@ async function countLikes(id) {
 export default {
   findMainComments,
   create,
-  countLikes
+  countLikes,
+  findChildComments
   //   find,
   //   update,
   //   delete: deleteCustomer

@@ -1,0 +1,37 @@
+:root {
+    --background: #f3f2ef;
+    --second-background: #fdfdfd;
+    --border-color: #d8d7d5;
+    --date-color: #b1b1b1;
+  }
+  
+  .reply-homepage {
+    margin-top: 1rem;
+    margin-left: 3rem;
+    padding: 0.5rem;
+    text-align: justify;
+    border-radius: 1rem;
+    background: var(--background);
+  }
+
+  .reply-username {
+    font-size: 1.1rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .reply-date {
+    font-style: italic;
+    color: var(--date-color);
+    padding-bottom: 0.3rem;
+    font-size: .9rem;
+    padding-left: 1rem;
+  }
+
+  img.reply-image-homepage {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 80%;
+    margin-left: 10%;
+  }
+  
+  

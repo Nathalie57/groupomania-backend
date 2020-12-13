@@ -94,17 +94,17 @@ Comment.deleteByUser = ([id, id_user], result) => {
     });
 };
 
-Comment.getMainComments = result => {
-    sql.query("SELECT * FROM comment WHERE id_parent IS NULL ORDER BY created_at DESC", (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(null, err);
-            return;
-        }
-        console.log(res);
-        result(null, res);
-    });
-};
+// Comment.getMainComments = result => {
+//     sql.query("SELECT * FROM comment WHERE id_parent IS NULL ORDER BY created_at DESC", (err, res) => {
+//         if (err) {
+//             console.log("error: ", err);
+//             result(null, err);
+//             return;
+//         }
+//         console.log(res);
+//         result(null, res);
+//     });
+// };
 
 Comment.getMainComments = result => {
     sql.query("SELECT comment.id, username, content, created_at, image, id_parent FROM user INNER JOIN comment ON user.id = comment.id_user WHERE id_parent IS NULL ORDER BY id DESC", (err, res) => {
@@ -157,7 +157,8 @@ Comment.getSingleMainComment = (id, result) => {
 };
 
 Comment.getChildComments = (id_parent, result) => {
-    sql.query("SELECT * FROM comment WHERE id_parent = ? ", id_parent, (err, res) => {
+    // "SELECT comment.id, username, content, created_at, image, id_parent FROM user INNER JOIN comment ON user.id = comment.id_user WHERE id_parent IS NULL ORDER BY id DESC"
+    sql.query("SELECT comment.id, username, content, created_at, image, id_parent FROM user INNER JOIN comment ON user.id = comment.id_user WHERE id_parent = ? ", id_parent, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
