@@ -1,20 +1,17 @@
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./commentHomePage.css";
+import "../replyHomePage/replyHomePage.css";
 import CommentsAPI from "../../services/commentDatamanager";
 import ReplyHomePage from "../replyHomePage/replyHomePage";
 import GetCountedLikes from "../countLikes/countLikes";
+import CreateReply from "../createReply/createReply";
 
 const CommentHomePage = (props) => {
-  String.prototype.ucFirst = function () {
-    return this.substr(0, 1).toUpperCase() + this.substr(1);
-  };
-
+  
   const formatDate = (str) => moment(str).format("DD/MM/YYYY");
 
   const [comments, setComments] = useState([]);
-
-  // const [replies, setReplies] = useState([]);
 
   const getComments = async () => {
     try {
@@ -26,27 +23,13 @@ const CommentHomePage = (props) => {
     }
   };
 
-  const idParent = comments.id;
-  // console.log(idParent);
-
-  //   const getReplies = async () => {
-  //   try {
-  //       CommentsAPI.findChildComments(idParent)
-  //       .then((response) => response.data)
-  //       .then((data) => setComments(data));
-  //   } catch (error) {
-  //     console.log(error.response);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getReplies(idParent);
-  // }, [idParent]);
-
   useEffect(() => {
     getComments();
   }, []);
-  // console.log(replies);
+
+  String.prototype.ucFirst = function () {
+    return this.substr(0, 1).toUpperCase() + this.substr(1);
+  };
 
   return (
     <>
@@ -61,10 +44,14 @@ const CommentHomePage = (props) => {
             </div>
             <div className="counted-likes">
               <div className="under-image">
-              <span>
-                <GetCountedLikes id={comment.id} />
-              </span>
-              <span>Nombre de commentaires</span>
+                <span>
+                  <GetCountedLikes id={comment.id} />
+                </span>
+                <span>
+                  <button type="button"className="replies-button"> 
+                    Commentaires
+                  </button>
+                </span>
               </div>
             </div>
             <div>
@@ -72,7 +59,14 @@ const CommentHomePage = (props) => {
               <span className="share">Partager</span>
               <span className="comment">Commenter</span>
             </div>
-            <ReplyHomePage id={comment.id} />
+            <div className="createReply">
+              <CreateReply id/>
+            </div>
+            <div id="replies">
+              <ReplyHomePage
+                id={comment.id}
+              />
+            </div>
           </div>
         ))}
       </div>

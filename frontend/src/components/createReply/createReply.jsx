@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import ImageUploader from "react-images-upload";
 import Field from "../../components/inputField/inputField.jsx";
-import Button from "../../components/button/commentButton.jsx";
+import Button from "../../components/button/replyButton.jsx";
 import CommentsAPI from "../../services/commentDatamanager";
 import "../../components/button/button.css";
 import "../../pages/loginPage/loginPage.css";
+import "./createReply.css"
 
-export default function Modal(props) {
+const CreateReply = ({ id }) => {
   const [comment, setComment] = useState({
     content: "",
     image: "",
@@ -24,24 +25,10 @@ export default function Modal(props) {
     setComment({ ...comment, [name]: value });
   };
 
-  function close() {
-    props.modalElement.current.style.display = "none";
-  }
-
-  function open() {
-    console.log("open");
-    props.modalElement.current.style.display = "block";
-  }
-
-  useEffect(() => {
-    props.buttonOpen.current.onclick = open;
-  });
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await CommentsAPI.create(comment);
-      props.modalElement.current.style.display = "none";
+      await CommentsAPI.createReply(comment, id);
     } catch (error) {
       console.log(error.response.data);
     }
@@ -49,17 +36,17 @@ export default function Modal(props) {
   };
 
   return (
-    <div className="login-form">
+    <div className="create-reply">
       <form onSubmit={handleSubmit}>
-        <h1>Créer un post</h1>
         <Field
           name="content"
           type="text"
           label="Nouveau post"
           onChange={handleChange}
           value={comment.content}
+          placeholder="Ajouter un commentaire"
         />
-        <ImageUploader
+        {/* <ImageUploader
           {...props}
           withIcon={true}
           onChange={onDrop}
@@ -67,18 +54,13 @@ export default function Modal(props) {
           maxFileSize={5242880}
           name="image"
           value={comment.image}
-        />
-        <div className="create-comment-button">
+        /> */}
+        <div className="create-reply-button">
           <Button value="Publier" type="submit" />
         </div>
       </form>
-      <div className="create-comment-button">
-        <Button
-          value="Annuler"
-          type="button"
-          onClick={close}
-        />
-      </div>
     </div>
   );
 }
+
+export default CreateReply;

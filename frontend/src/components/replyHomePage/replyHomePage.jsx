@@ -3,18 +3,15 @@ import React, { useEffect, useState } from "react";
 import "./replyHomePage.css";
 import CommentsAPI from "../../services/commentDatamanager";
 
-const ReplyHomePage = ({ id }) => {
-  String.prototype.ucFirst = function () {
-    return this.substr(0, 1).toUpperCase() + this.substr(1);
-  };
-
+export default function ReplyHomePage(props) {
+  
   const formatDate = (str) => moment(str).format("DD/MM/YYYY");
 
   const [comments, setComments] = useState([]);
 
   const getChildComments = async () => {
     try {
-      CommentsAPI.findChildComments(id)
+      CommentsAPI.findChildComments(props.id)
         .then((response) => response.data)
         .then((data) => setComments(data));
     } catch (error) {
@@ -23,8 +20,12 @@ const ReplyHomePage = ({ id }) => {
   };
 
   useEffect(() => {
-    getChildComments(id);
-  }, [id]);
+    getChildComments(props.id);
+  }, [props.id]);
+
+  String.prototype.ucFirst = function () {
+    return this.substr(0, 1).toUpperCase() + this.substr(1);
+  };
 
   return (
     <>
@@ -44,4 +45,4 @@ const ReplyHomePage = ({ id }) => {
   );
 };
 
-export default ReplyHomePage;
+// export default ReplyHomePage;

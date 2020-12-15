@@ -11,15 +11,9 @@ const HomePage = (props) => {
   const token = localStorage.getItem("authToken");
   const jwtData = jwtDecode(token);
   const username = jwtData.username;
-
   
   const buttonOpen = useRef(null);
   const modalElement = useRef(null);
-  
-  const [comment, setComment] = useState({
-    content: "",
-    image: "",
-  });
   
   String.prototype.ucFirst = function () {
     return this.substr(0, 1).toUpperCase() + this.substr(1);
@@ -40,7 +34,6 @@ const HomePage = (props) => {
                 modalElement={modalElement}
               />
           </div>
-
           <CommentHomePage />
         </>
       </header>

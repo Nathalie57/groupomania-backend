@@ -82,3 +82,7 @@ span.comment:before {
   padding-right: 0.2rem;
   padding-left: 1rem;
 }
+
+#replies {
+  display: block;
+}

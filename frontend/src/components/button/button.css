@@ -21,3 +21,22 @@
     font-size: 1rem;
     text-decoration: none;
   }
+
+  .replies-button {
+    border: none;
+    background: var(--second-background);
+  }
+
+  button.reply-button {
+    display: none;
+    /* border: none;
+    background: var(--second-background); */
+}
+
+button.comment-button {
+  border-radius: .5rem;
+  border-color: var(--input-text);
+  margin: .5rem;
+  width: 20%;
+  padding: .3rem;
+}
