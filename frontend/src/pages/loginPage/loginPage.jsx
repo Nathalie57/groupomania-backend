@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import authentication from "../../services/authentication";
 import Button from "../../components/button/loginButton.jsx";
 import Field from "../../components/inputField/inputField.jsx";
@@ -62,7 +62,9 @@ const LoginPage = ({ onLogin }) => {
             </div>
           </form>
           <div className="login-form">
-          <p>Pas encore de compte, inscrivez-vous !</p>
+          <p>Pas encore de compte, inscrivez-vous <Link to="/signup">
+            ici
+          </Link>!</p>
           </div>
         </header>
       </div>

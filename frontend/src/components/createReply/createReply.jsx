@@ -11,6 +11,7 @@ const CreateReply = ({ id }) => {
   const [comment, setComment] = useState({
     content: "",
     image: "",
+    id_parent: id
   });
 
   const [images, setImages] = useState([]);

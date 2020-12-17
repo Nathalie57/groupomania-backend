@@ -157,8 +157,7 @@ Comment.getSingleMainComment = (id, result) => {
 };
 
 Comment.getChildComments = (id_parent, result) => {
-    // "SELECT comment.id, username, content, created_at, image, id_parent FROM user INNER JOIN comment ON user.id = comment.id_user WHERE id_parent IS NULL ORDER BY id DESC"
-    sql.query("SELECT comment.id, username, content, created_at, image, id_parent FROM user INNER JOIN comment ON user.id = comment.id_user WHERE id_parent = ? ", id_parent, (err, res) => {
+    sql.query("SELECT comment.id, username, content, created_at, image, id_parent FROM user INNER JOIN comment ON user.id = comment.id_user WHERE id_parent = ? ORDER BY id ASC", id_parent, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);

@@ -60,7 +60,7 @@ const CommentHomePage = (props) => {
               <span className="comment">Commenter</span>
             </div>
             <div className="createReply">
-              <CreateReply id/>
+              <CreateReply id={comment.id}/>
             </div>
             <div id="replies">
               <ReplyHomePage

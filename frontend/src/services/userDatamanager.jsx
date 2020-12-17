@@ -1,8 +1,15 @@
 import axios from "axios";
 import { USERS_API } from "../config";
 
-function register(user) {
-  return axios.post(USERS_API, user);
+async function register(user) {
+  const config = {
+    method: "post",
+    url: `${USERS_API + "/signup"}`,
+    data: user,
+  };
+  let response = await axios(config);
+  console.log(response);
+  return response;
 }
 
 export default {

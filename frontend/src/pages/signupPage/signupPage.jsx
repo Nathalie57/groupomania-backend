@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import Field from "../../components/inputField/inputField.jsx";
 import Button from "../../components/button/commentButton.jsx";
 import UsersAPI from "../../services/userDatamanager";
+import "../../components/button/button.css"
 
-const SignupPage = ({ history }) => {
+const SignupPage = (props) => {
   const [user, setUser] = useState({
     username: "",
     email: "",
     password: "",
     passwordConfirm: "",
-    is_admin: 0
+    is_admin: 0,
   });
 
   const [errors, setErrors] = useState({
@@ -19,6 +20,8 @@ const SignupPage = ({ history }) => {
     password: "",
     passwordConfirm: "",
   });
+
+  const history = useHistory();
 
   // Gestion des changements des inputs dans le formulaire
   const handleChange = ({ currentTarget }) => {
@@ -36,89 +39,74 @@ const SignupPage = ({ history }) => {
       apiErrors.passwordConfirm =
         "Votre confirmation de mot de passe n'est pas conforme avec le mot de passe original";
       setErrors(apiErrors);
-      toast.error("Des erreurs dans votre formulaire !");
+      //   toast.error("Des erreurs dans votre formulaire !");
       return;
     }
 
     try {
       await UsersAPI.register(user);
-      setErrors({});
-
+      history.push("/");
       // TODO : Flash success
-      toast.success(
-        "Vous êtes désormais inscrit, vous pouvez vous connecter !"
-      );
-      history.replace("/login");
+      //   toast.success(
+      //     "Vous êtes désormais inscrit, vous pouvez vous connecter !"
+      //   );
     } catch (error) {
-      const { violations } = error.response.data;
-
-      if (violations) {
-        violations.forEach((violation) => {
-          apiErrors[violation.propertyPath] = violation.message;
-        });
-        setErrors(apiErrors);
-      }
-      toast.error("Des erreurs dans votre formulaire !");
+        console.log(error.response);
     }
+    return <Redirect to="/" refresh="true" />;
   };
 
   return (
     <>
-      <h1>Inscription</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="App">
+    <header className="App-header">
+      <h2>Inscription</h2>
+      <form onSubmit={handleSubmit} className="login-form">
         <Field
-          name="firstName"
-          label="Prénom"
-          placeholder="Votre joli prénom"
+          name="username"
+          label="Pseudo"
           error={errors.firstName}
           value={user.firstName}
           onChange={handleChange}
-        />
-        <Field
-          name="lastName"
-          label="Nom de famille"
-          placeholder="Votre nom de famille"
-          error={errors.lastName}
-          value={user.lastName}
-          onChange={handleChange}
+          span="Entrez votre pseudo ici"
         />
         <Field
           name="email"
-          label="Adresse email"
-          placeholder="Votre adresse email"
+          label="Email"
           type="email"
           error={errors.email}
           value={user.email}
           onChange={handleChange}
+          span="Entrez votre adresse email ici"
         />
         <Field
           name="password"
           label="Mot de passe"
           type="password"
-          placeholder="Votre mot de passe ultra sécurisé"
           error={errors.password}
           value={user.password}
           onChange={handleChange}
+          span="Entrez votre mot de passe ici"
         />
         <Field
           name="passwordConfirm"
-          label="Confirmation de mot de passe"
+          label="Confirmation du mot de passe"
           type="password"
-          placeholder="Confirmez votre super mot de passe"
           error={errors.passwordConfirm}
           value={user.passwordConfirm}
           onChange={handleChange}
+          span="Confirmez votre mot de passe ici"
         />
 
         <div className="form-group">
-          <button type="submit" className="btn btn-success">
-            Confirmation
-          </button>
+        <Button value="Connexion" type="submit" className="login-button" />
           <Link to="/login" className="btn btn-link">
             J'ai déjà un compte
           </Link>
         </div>
       </form>
+      </header>
+      </div>
     </>
   );
 };
