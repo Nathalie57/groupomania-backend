@@ -20,49 +20,7 @@
   background: var(--second-background);
 }
 
-/* .comment-form {
-  margin: 2rem;
-  padding: 2.5rem;
-  text-align: justify;
-  border: solid;
-  border-color: var(--border-color);
-  border-radius: 1rem;
-  background: var(--second-background);
+.comment-creation:hover {
+  cursor: pointer;
 }
-
-.comment-form li {
-  display: block;
-  padding: 9px;
-  border: 1px solid #dddddd;
-  margin-bottom: 30px;
-  border-radius: 3px;
-} */
-
-/*.comment-form li > label {
-    display: block;
-    float: left;
-    margin-top: -19px;
-    background: #ffffff;
-    height: 14px;
-    padding: 2px 5px 2px 5px;
-    color: #5d5d5d;
-    font-size: 14px;
-    overflow: hidden;
-    font-family: "Roboto";
-  }*/
-  
-  /* .comment-form input {
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    width: 100%;
-    display: block;
-    outline: none;
-    border: none;
-    height: 25px;
-    line-height: 25px;
-    font-size: 16px;
-    padding: 0;
-    font-family: "Roboto";
-  }  */
 

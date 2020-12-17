@@ -40,3 +40,18 @@ button.comment-button {
   width: 20%;
   padding: .3rem;
 }
+
+.like-button {
+  border: none;
+  background: none;
+  font-family: 'Roboto';
+  font-size: 1rem;
+}
+
+.like-button:hover {
+  cursor: pointer;
+}
+
+span.like:hover {
+  cursor: pointer;
+}

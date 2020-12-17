@@ -70,10 +70,24 @@ async function countLikes(id) {
   return data;
 }
 
+async function createLike(like, id) {
+  const token = localStorage.getItem("authToken");
+  const config = {
+    method: "post",
+    url: `${COMMENTS_API + "/" + id + "/likes"}`,
+    data: like,
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  let response = await axios(config);
+  console.log(response);
+  return response;
+}
+
 export default {
   findMainComments,
   create,
   countLikes,
   findChildComments,
-  createReply
+  createReply,
+  createLike
 };

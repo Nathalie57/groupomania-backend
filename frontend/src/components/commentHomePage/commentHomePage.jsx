@@ -6,9 +6,9 @@ import CommentsAPI from "../../services/commentDatamanager";
 import ReplyHomePage from "../replyHomePage/replyHomePage";
 import GetCountedLikes from "../countLikes/countLikes";
 import CreateReply from "../createReply/createReply";
+import CreateLike from "../createLike/createLike";
 
 const CommentHomePage = (props) => {
-  
   const formatDate = (str) => moment(str).format("DD/MM/YYYY");
 
   const [comments, setComments] = useState([]);
@@ -48,24 +48,24 @@ const CommentHomePage = (props) => {
                   <GetCountedLikes id={comment.id} />
                 </span>
                 <span>
-                  <button type="button"className="replies-button"> 
+                  <button type="button" className="replies-button">
                     Commentaires
                   </button>
                 </span>
               </div>
             </div>
             <div>
-              <span className="like">J'aime</span>
+              {/* <span className="like">J'aime</span> */}
+              
+                <CreateLike id={comment.id} />
               <span className="share">Partager</span>
               <span className="comment">Commenter</span>
             </div>
             <div className="createReply">
-              <CreateReply id={comment.id}/>
+              <CreateReply id={comment.id} />
             </div>
             <div id="replies">
-              <ReplyHomePage
-                id={comment.id}
-              />
+              <ReplyHomePage id={comment.id} />
             </div>
           </div>
         ))}
