@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ImageUploader from "react-images-upload";
 import Field from "../../components/inputField/inputField.jsx";
 import Button from "../../components/button/replyButton.jsx";
 import CommentsAPI from "../../services/commentDatamanager";
@@ -13,12 +12,6 @@ const CreateReply = ({ id }) => {
     image: "",
     id_parent: id
   });
-
-  const [images, setImages] = useState([]);
-
-  const onDrop = (image) => {
-    setImages([...images, image]);
-  };
 
   const handleChange = ({ currentTarget }) => {
     const { value, name } = currentTarget;
@@ -47,15 +40,6 @@ const CreateReply = ({ id }) => {
           value={comment.content}
           placeholder="Ajouter un commentaire"
         />
-        {/* <ImageUploader
-          {...props}
-          withIcon={true}
-          onChange={onDrop}
-          imgExtension={[".jpg", ".gif", ".png", ".gif"]}
-          maxFileSize={5242880}
-          name="image"
-          value={comment.image}
-        /> */}
         <div className="create-reply-button">
           <Button value="Publier" type="submit" />
         </div>

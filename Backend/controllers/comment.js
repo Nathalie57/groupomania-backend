@@ -36,10 +36,9 @@ exports.createReply = (req, res) => {
         });
     }
     const user = decode(req.headers.authorization);
-    const imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
     const reply = new Comment({
         content: req.body.content,
-        image: imageUrl,
+        image: req.body.image,
         created_at: date,
         id_user: user.id,
         id_parent: req.body.id_parent
