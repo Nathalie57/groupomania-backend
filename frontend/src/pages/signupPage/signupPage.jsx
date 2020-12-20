@@ -99,7 +99,7 @@ const SignupPage = (props) => {
         />
 
         <div className="form-group">
-        <Button value="Connexion" type="submit" className="login-button" />
+        <Button value="S'inscrire" type="submit" className="login-button" />
           <Link to="/login" className="btn btn-link">
             J'ai déjà un compte
           </Link>

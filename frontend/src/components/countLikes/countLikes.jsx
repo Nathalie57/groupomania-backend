@@ -19,8 +19,9 @@ const GetCountedLikes = ({ id }) => {
   }, [id]);
 
   console.log(likes);
-  console.log(likes[0]);
+  // console.log(likes[0]);
   const like = likes[0];
+
   return (
     <>
       <div>
@@ -28,7 +29,7 @@ const GetCountedLikes = ({ id }) => {
           <div className="">
             <span className="likesCount">{}</span>
           </div>
-        {/* ))} */}
+         {/* ))}  */}
       </div>
     </>
   );

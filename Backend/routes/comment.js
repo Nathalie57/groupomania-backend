@@ -7,7 +7,7 @@ const auth = require('../middlewares/auth');
 const commentCtrl = require('../controllers/comment');
 const likeCtrl = require('../controllers/like');
 
-router.get('/', commentCtrl.getMainComments);
+router.get('/', auth, commentCtrl.getMainComments);
 router.get('/:id', auth, commentCtrl.getSingleMainComment);
 router.get('/:id_parent/childcomments', auth, commentCtrl.getChildComments);
 router.get('/user/:id_user', auth, commentCtrl.getCommentsByUser);

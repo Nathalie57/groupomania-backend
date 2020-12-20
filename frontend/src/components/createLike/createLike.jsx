@@ -21,7 +21,7 @@ const CreateLike = ({ id }) => {
 
   return (
     <>
-      <button class="like-button" onClick={handleSubmit}><span className="like">
+      <button className="like-button" onClick={handleSubmit}><span className="like">
         J'aime
       </span></button>
     </>

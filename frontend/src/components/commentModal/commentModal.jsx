@@ -59,25 +59,20 @@ export default function Modal(props) {
           onChange={handleChange}
           value={comment.content}
         />
-        <ImageUploader
-          {...props}
-          withIcon={true}
-          onChange={onDrop}
-          imgExtension={[".jpg", ".gif", ".png", ".gif"]}
-          maxFileSize={5242880}
+        <Field
           name="image"
+          type="file"
+          label="Image"
+          onChange={handleChange}
           value={comment.image}
-        />
+        >
+        </Field>
         <div className="create-comment-button">
           <Button value="Publier" type="submit" />
         </div>
       </form>
       <div className="create-comment-button">
-        <Button
-          value="Annuler"
-          type="button"
-          onClick={close}
-        />
+        <Button value="Annuler" type="button" onClick={close} />
       </div>
     </div>
   );

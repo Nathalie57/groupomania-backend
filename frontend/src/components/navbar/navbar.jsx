@@ -14,10 +14,6 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
     <Redirect to="/" refresh="true" />;
   };
 
-  function changeName() {
-    document.getElementById("signup-button").innerHTML = "Connexion";
-  }
-
   return (
     <ul className="navigation">
       {(!isAuthenticated && (
@@ -27,22 +23,11 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
               <img src="logo.png" className="logo" alt="logo"></img>
             </NavLink>
           </li>
-          {/* <li>
-            <NavLink to="/signup">
-              <div>
-                <Button
-                  id="signup-button"
-                  value="Inscription"
-                  // onClick={changeName}
-                ></Button>
-              </div>
-            </NavLink>
-          </li> */}
         </>
       )) || (
         <>
           <li>
-            <NavLink to="/accueil">
+            <NavLink to="/">
               <img src="logo.png" className="logo" alt="logo"></img>
             </NavLink>
           </li>
