@@ -12,6 +12,7 @@ exports.createComment = (req, res) => {
         });
     }
     const user = decode(req.headers.authorization);
+    console.log(user);
     const comment = new Comment({
         content: req.body.content,
         image: req.body.image,
@@ -36,6 +37,7 @@ exports.createReply = (req, res) => {
         });
     }
     const user = decode(req.headers.authorization);
+    console.log(user);
     const reply = new Comment({
         content: req.body.content,
         image: req.body.image,

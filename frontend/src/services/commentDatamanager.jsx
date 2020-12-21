@@ -4,16 +4,16 @@ import { COMMENTS_API } from "../config";
 
 async function findMainComments() {
   const token = localStorage.getItem("authToken");
-  const cachedComments = await Cache.get("comments");
+  // const cachedComments = await Cache.get("comments");
 
-  if (cachedComments) return cachedComments;
+  // if (cachedComments) return cachedComments;
 
   const config = {
     method: "get",
     url: `${COMMENTS_API}`,
     headers: { Authorization: `Bearer ${token}` },
   };
-
+  // console.log(config);
   let data = await axios(config);
   return data;
 }

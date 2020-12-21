@@ -1,6 +1,7 @@
 const sql = require('../db_connection.js');
 
 const Comment = function (comment) {
+    console.log(comment.image);
     this.content = comment.content;
     this.image = comment.image;
     this.created_at = comment.created_at;
@@ -114,7 +115,7 @@ Comment.getMainComments = result => {
             result(null, err);
             return;
         }
-        console.log(res);
+        // console.log(res);
         result(null, res);
     });
 };
@@ -132,7 +133,7 @@ Comment.getSingleComment = (id, result) => {
             return;
         }
 
-        console.log(res);
+        // console.log(res);
         result(null, res);
     });
 };
@@ -151,7 +152,7 @@ Comment.getSingleMainComment = (id, result) => {
             return;
         }
 
-        console.log(res);
+        // console.log(res);
         result(null, res);
     });
 };
@@ -170,7 +171,7 @@ Comment.getChildComments = (id_parent, result) => {
         //     return;
         // }
 
-        console.log(res);
+        // console.log(res);
         result(null, res);
     });
 };

@@ -44,7 +44,7 @@ User.findOne = (email, result) => {
       return;
     }
     if (res.length) {
-      console.log(res[0]);
+      // console.log(res[0]);
       result(null, res[0]);
       return;
     }
@@ -59,7 +59,7 @@ User.getUserById = (id, result) => {
       result(null, err);
       return;
     }
-    console.log(res);
+    // console.log(res);
     result(null, res);
   });
 };
@@ -73,7 +73,7 @@ User.getUsers = result => {
       result(null, err);
       return;
     }
-    console.log(res);
+    // console.log(res);
     result(null, res);
   });
 };
