@@ -12,10 +12,11 @@ exports.createComment = (req, res) => {
         });
     }
     const user = decode(req.headers.authorization);
-    console.log(user);
+    console.log("blibli", req.file);
     const comment = new Comment({
         content: req.body.content,
-        image: req.body.image,
+        // image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+        image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null ),
         created_at: date,
         id_user: user.id,
         id_parent: null
@@ -37,15 +38,16 @@ exports.createReply = (req, res) => {
         });
     }
     const user = decode(req.headers.authorization);
-    console.log(user);
+    console.log("blabla", req.file, "fdfd", req.params);
     const reply = new Comment({
         content: req.body.content,
-        image: req.body.image,
+        image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null ),
+        // image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
         created_at: date,
         id_user: user.id,
-        id_parent: req.body.id_parent
+        id_parent: req.params.id_parent
     });
-    Comment.createReply(reply, (err, data) => {
+    Comment.createComment(reply, (err, data) => {
         if (err)
             res.status(500).send({
                 message:
@@ -184,5 +186,22 @@ exports.getCommentsByUser = (req, res) => {
                 });
             }
         } else res.send(data);
+    });
+};
+
+exports.countRepliesByComment = (req, res) => {
+    Comment.countComments(req.params.id, (err, data) => {
+        if (err) {
+            if (err.type === "not_found") {
+                res.status(404).send({
+                    message: `Ce commentaire n'existe pas`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Une erreur est survenue"
+                });
+            }
+        } else res.send(data);
+        // console.log(data);
     });
 };

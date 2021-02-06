@@ -39,6 +39,7 @@ exports.login = (req, res) => {
             return;
         }
         bcrypt.compare(req.body.password, data.password, function (error, response) {
+            console.log(error, response)
             if (error) {
                 if (error.type === "not_found") {
                     res.status(404).send({
@@ -51,7 +52,7 @@ exports.login = (req, res) => {
                 }
             };
             if(response) res.status(200).json({
-                response: response,
+                // response: response,
                 id: data.id,
                 username: data.username,
                 is_admin: data.is_admin,

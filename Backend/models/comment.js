@@ -22,18 +22,18 @@ Comment.createComment = (newComment, result) => {
     });
 };
 
-Comment.createReply = (newReply, result) => {
-    sql.query("INSERT INTO comment SET ?", newReply, (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
-            return;
-        }
+// Comment.createReply = (newReply, result) => {
+//     sql.query("INSERT INTO comment SET ?", newReply, (err, res) => {
+//         if (err) {
+//             console.log("error: ", err);
+//             result(err, null);
+//             return;
+//         }
 
-        console.log("created reply: ", { id: res.insertId, ...newReply });
-        result(null, { id: res.insertId, ...newReply });
-    });
-};
+//         console.log("created reply: ", { id: res.insertId, ...newReply });
+//         result(null, { id: res.insertId, ...newReply });
+//     });
+// };
 
 // Comment.update = ([id, id_user], comment, result) => {
 //     sql.query(
@@ -108,7 +108,7 @@ Comment.deleteByUser = ([id, id_user], result) => {
 // };
 
 Comment.getMainComments = result => {
-    sql.query("SELECT comment.id, username, content, created_at, image, id_parent FROM user INNER JOIN comment ON user.id = comment.id_user WHERE id_parent IS NULL ORDER BY id DESC", (err, res) => {
+    sql.query("SELECT comment.id, comment.id_user, username, content, created_at, image, id_parent FROM user INNER JOIN comment ON user.id = comment.id_user WHERE id_parent IS NULL ORDER BY id DESC", (err, res) => {
        
         if (err) {
             console.log("error: ", err);
@@ -192,6 +192,18 @@ Comment.getCommentsByUser = (id_user, result) => {
 
         // not found Customer with the id
         result({ kind: "not_found" }, null);
+    });
+};
+
+Comment.countComments = (id_parent, result) => {
+    sql.query("SELECT COUNT(id_parent) FROM comment WHERE id_parent = ?", id_parent, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+        // console.log(res);
+        result(null, res);
     });
 };
 
