@@ -20,15 +20,12 @@ User.create = (newUser, result) => {
 };
 
 User.delete = (id, result) => {
-    sql.query("DELETE user, comment, likes FROM user LEFT JOIN comment ON comment.id_user = user.id LEFT JOIN likes ON likes.id_user = user.id WHERE user.id = ?", id, (err, res) => {
-    // sql.query("DELETE FROM user WHERE id = ?", id, (err, res) => {
+    sql.query("DELETE user, comment FROM user LEFT JOIN comment ON comment.id_user = user.id WHERE user.id = ?", [id], (err, res) => {
     if (err) {
-      console.log("error: ", err);
-      result(null, err);
+      result( err, null);
       return;
     }
     if (res.affectedRows == 0) {
-      // user not found with the id
       result({ type: "not_found" }, null);
       return;
     }

@@ -1,4 +1,3 @@
-// const mariadb = require('mariadb');
 const mysql = require('mysql');
 const env = require('dotenv').config();
 if (env.error) {
@@ -22,11 +21,3 @@ connection.connect(function(err) {
 });
 
 module.exports = connection;
-// const pool = mariadb.createPool({
-//     host: process.env.DB_HOST,
-//     user: process.env.DB_USER,
-//     password: process.env.DB_PASS,
-//     database: process.env.DB_NAME
-// })
-
-// exports.getConnection = pool.getConnection();

@@ -76,6 +76,7 @@ exports.login = (req, res) => {
 
 exports.delete = (req, res) => {
     User.delete(req.params.id, (err, data) => {
+        console.log("+", err, data);
         if (err) {
             if (err.type === "not_found") {
                 res.status(404).send({

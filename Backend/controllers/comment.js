@@ -142,6 +142,7 @@ exports.getMainComments = (req, res) => {
                     err.message || "Une erreur est survenue"
             });
         else res.send(data);
+        console.log(data)
     });
 };
 
