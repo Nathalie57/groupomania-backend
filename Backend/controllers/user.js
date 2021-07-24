@@ -1,6 +1,5 @@
 const User = require("../models/user.js");
 const bcrypt = require('bcrypt');
-const maskData = require('maskdata');
 const jwt = require('jsonwebtoken');
 const token = require("../utils/auth");
 const decode = token.decode;
@@ -14,7 +13,7 @@ exports.create = (req, res) => {
     // Create a User
     bcrypt.hash(req.body.password, 10, function (err, hash) {
         const user = new User({
-            email: maskData.maskEmail2(req.body.email),
+            email: req.body.email,
             username: req.body.username,
             password: hash
         });
@@ -32,7 +31,7 @@ exports.create = (req, res) => {
 
 exports.login = (req, res) => {
 
-    User.findOne(maskData.maskEmail2(req.body.email), (err, data) => {
+    User.findOne(req.body.email, (err, data) => {
         console.log("..", err, data);
         if(err) {
             res.status(401).send("unknown");
