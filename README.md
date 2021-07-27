@@ -1,6 +1,7 @@
 ## Groupomania - P7 
-___
 ### Créez un réseau social d'entreprise
+___
+Le backend est développé en Node.js et le framework Express. La base de données est en MySQL.
 ___
 #### Installation du backend de l'application Groupomania
 
