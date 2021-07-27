@@ -45,14 +45,9 @@ Like.getLikeByUserByComment = ([id_comment, id_user] , result) => {
     const query = sql.query("SELECT id FROM likes WHERE id_comment = ? AND id_user = ? LIMIT 1", [id_comment, id_user]);
     query
         .on('error', function (err) {
-            // Handle error, an 'end' event will be emitted after this as well
             console.log("err======", err);
             result(err,null);
         })
-        // .on('fields', function (fields) {
-        //     // the field packets for the rows to follow
-        //     console.log("fields======", fields)
-        // })
         .on('result', function (row) {
             console.log("======", row);
             found = row;
@@ -70,7 +65,6 @@ Like.countLikes = (id_comment, result) => {
             result(null, err);
             return;
         }
-        // console.log(res);
         result(null, res);
     });
 };

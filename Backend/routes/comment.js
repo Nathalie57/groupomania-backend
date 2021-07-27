@@ -19,8 +19,6 @@ router.post('/', auth, multer, commentCtrl.createComment);
 router.post('/:id_parent/replies', auth, multer, commentCtrl.createReply);
 router.post('/:id_comment/likes', auth, likeCtrl.manageLike);
 
-//router.put('/:id', auth, commentCtrl.update);
-
 router.delete('/:id', auth, commentCtrl.delete);
 
 module.exports = router;

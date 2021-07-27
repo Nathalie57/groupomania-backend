@@ -51,7 +51,6 @@ exports.login = (req, res) => {
                 }
             };
             if(response) res.status(200).json({
-                // response: response,
                 id: data.id,
                 username: data.username,
                 is_admin: data.is_admin,
@@ -108,7 +107,6 @@ exports.getUserById = (req, res) => {
 
 exports.getUsers = (req, res) => {
     const user = decode(req.headers.authorization);
-    // console.log(user.role);
     if (user.role === 1) {
         User.getUsers((err, data) => {
             if (err)

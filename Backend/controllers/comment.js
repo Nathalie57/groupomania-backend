@@ -15,7 +15,6 @@ exports.createComment = (req, res) => {
     console.log("blibli", req.file);
     const comment = new Comment({
         content: req.body.content,
-        // image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
         image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null ),
         created_at: date,
         id_user: user.id,
@@ -56,50 +55,6 @@ exports.createReply = (req, res) => {
         else res.send(data);
     });
 };
-
-// exports.getSingleComment = (req, res) => {
-//     Comment.getSingleComment(req.params.id, (err, data) => {
-//         if (err) {
-//             if (err.type === "not_found") {
-//                 res.status(404).send({
-//                     message: `Ce commentaire n'existe pas`
-//                 });
-//             } else {
-//                 res.status(500).send({
-//                     message: "Une erreur est survenue"
-//                 });
-//             }
-//         } else res.send(data);
-//     });
-// };
-
-// exports.update = (req, res) => {
-//     if (!req.body) {
-//         res.status(400).send({
-//             message: "Le contenu ne peut pas être vide"
-//         });
-//     }
-//     console.log(req.body);
-//     const user = decode(req.headers.authorization);
-//     Comment.update(
-//         [req.params.id, 
-//         user.id],
-//         new Comment(req.body),
-//         (err, data) => {
-//             if (err) {
-//                 if (err.type === "not_found") {
-//                     res.status(404).send({
-//                         message: "Commentaire non trouvé"
-//                     });
-//                 } else {
-//                     res.status(500).send({
-//                         message: "Le commentaire n'a pas été modifié"
-//                     });
-//                 }
-//             } else res.send(data);
-//         }
-//     );
-// };
 
 exports.delete = (req, res) => {
     const user = decode(req.headers.authorization);
@@ -203,6 +158,5 @@ exports.countRepliesByComment = (req, res) => {
                 });
             }
         } else res.send(data);
-        // console.log(data);
     });
 };

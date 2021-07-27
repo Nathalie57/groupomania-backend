@@ -20,26 +20,7 @@ function deleteLike(res, id_like) {
             }
         } else res.send({ message: `Le like a été supprimé` });
     });
-
 }
-
-// function addLike(req, res, id_comment, id_user, is_liked) {
-//     const like = new Like({
-//             id_comment,
-//             id_user,
-//             is_liked
-//         });
-//     //     console.log(like);
-//         Like.createLike([296, 21, 1], (err, data) => {
-        
-//         if (err)
-//             res.status(500).send({
-//                 message:
-//                     err.message || "Une erreur est survenue"
-//             });
-//         else res.send(data);
-//     });
-// }
 
 exports.manageLike = (req, res) => {
     const user = decode(req.headers.authorization);

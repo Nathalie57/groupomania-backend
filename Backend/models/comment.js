@@ -22,41 +22,6 @@ Comment.createComment = (newComment, result) => {
     });
 };
 
-// Comment.createReply = (newReply, result) => {
-//     sql.query("INSERT INTO comment SET ?", newReply, (err, res) => {
-//         if (err) {
-//             console.log("error: ", err);
-//             result(err, null);
-//             return;
-//         }
-
-//         console.log("created reply: ", { id: res.insertId, ...newReply });
-//         result(null, { id: res.insertId, ...newReply });
-//     });
-// };
-
-// Comment.update = ([id, id_user], comment, result) => {
-//     sql.query(
-//         "UPDATE comment SET content = ?, image = ? WHERE id = ? AND id_user = ?",
-//         [comment.content, comment.image, id, id_user],
-//         (err, res) => {
-//             if (err) {
-//                 console.log("error: ", err);
-//                 result(null, err);
-//                 return;
-//             }
-
-//             if (res.affectedRows == 0) {
-//                 result({ type: "not_found" }, null);
-//                 return;
-//             }
-
-//             console.log("mise à jour du commentaire n°", { id: id, ...comment });
-//             result(null, { id: id, ...comment });
-//         }
-//     );
-// };
-
 Comment.deleteByAdmin = (id, result) => {
     sql.query("DELETE FROM comment WHERE id = ?", id, (err, res) => {
         if (err) {
@@ -107,19 +72,6 @@ Comment.getMainComments = result => {
     });
 };
 
-// Comment.getMainComments = result => {
-//     sql.query("SELECT comment.id, comment.id_user, username, content, created_at, image, id_parent, likes.id FROM user INNER JOIN comment ON user.id = comment.id_user INNER JOIN likes ON likes.id_comment = comment.id WHERE id_parent IS NULL ORDER BY comment.id DESC", (err, res) => {
-       
-//         if (err) {
-//             console.log("error: ", err);
-//             result(null, err);
-//             return;
-//         }
-//         console.log(res);
-//         result(null, res);
-//     });
-// };
-
 Comment.getSingleComment = (id, result) => {
     sql.query("SELECT * FROM comment WHERE id = ?", id, (err, res) => {
         if (err) {
@@ -132,8 +84,6 @@ Comment.getSingleComment = (id, result) => {
             result({ type: "not_found" }, null);
             return;
         }
-
-        // console.log(res);
         result(null, res);
     });
 };
@@ -152,7 +102,6 @@ Comment.getSingleMainComment = (id, result) => {
             return;
         }
 
-        // console.log(res);
         result(null, res);
     });
 };
@@ -164,14 +113,6 @@ Comment.getChildComments = (id_parent, result) => {
             result(null, err);
             return;
         }
-
-        // if (res.length == 0) {
-        //     // user not found with the id
-        //     result({ type: "not_found" }, null);
-        //     return;
-        // }
-
-        // console.log(res);
         result(null, res);
     });
 };
@@ -202,7 +143,6 @@ Comment.countComments = (id_parent, result) => {
             result(null, err);
             return;
         }
-        // console.log(res);
         result(null, res);
     });
 };
