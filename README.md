@@ -8,7 +8,7 @@ ___
 1. Cloner le repository
 2. Se placer dans le dossier **Backend**
 3. Créer un dossier **images** à la racine
-4. Installer l'environnement : **npm install**
+4. Installer les dépendances du projet : **npm install**
 5. Démarrer le server : **nodemon server**
 Le backend tourne sur le port 3000.
 
